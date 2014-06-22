@@ -1,0 +1,55 @@
+.data-container {
+	position: absolute;
+	top: 85px;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+	border-left: 5px solid #CD3434;	
+	background: #FFF;
+	opacity: .95;
+	width: 290px;
+	padding: 5px 0 0 40px;
+}
+
+.data-container.closed {
+	right: -265px;
+	-webkit-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	-moz-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	-ms-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	-o-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	transition: 300ms cubic-bezier(.42,0,.58,1) right;
+}
+
+.data-container .sr-title {
+	margin-bottom: 0;
+}
+
+.data-container .pagination > .active > a {
+	background: #CD3434;
+	border-color: #CD3434;
+}
+
+.data-container .pagination > li > a,
+.data-container .pagination > .active > a {
+	cursor: pointer;
+}
+
+.data-container .close-icon {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.sr-filters {
+	font-size: 11px;
+}
+
+.sr-filters .checkbox {
+	margin: 0;
+}
+
+@media (min-width: 992px) {
+	.olaf-results .data-container {
+		width: 400px;
+	}
+}

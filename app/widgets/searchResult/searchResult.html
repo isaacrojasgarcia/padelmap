@@ -1,0 +1,74 @@
+<div class="data-container bs-callout bs-callout-warning" ng-class="{'closed': !showSidePanel }">
+	<div class="close-icon">
+		<div>
+			<a href="#" ng-click="toggleCentersList()" 
+				tooltip="{{tooltipClose}}" tooltip-placement="bottom">
+				<span class="fa fa-lg" 
+					ng-class="{
+						'fa-angle-double-right': showSidePanel,
+						'fa-angle-double-left': !showSidePanel
+					}">
+				</span>
+			</a>
+		</div>
+		<div ng-show="resultype === 'list'">
+			<span class="fa fa-list"></span>
+		</div>
+	</div>
+
+	<div ng-switch="resultType">
+		<div ng-switch-when="list">
+			<p class="lead sr-title">
+				<i class="fa fa-spinner fa-spin" ng-hide="centers.length"></i>
+				{{location.name}}
+			</p>
+
+			<p>
+				<i class="fa fa-spinner fa-spin" ng-hide="centers.length"></i>
+				<span ng-show="centers.length > 0">{{centers.length}}</span> Pistas de Pádel
+			</p>
+
+			<div class="sr-filters">
+		 		<ul class="row list-unstyled">
+		 			<li ng-repeat="filter in filters" class="col-xs-4 col-md-4">
+		 				<div class="checkbox">
+							<label>
+								<input type="checkbox" name="filter-{{filter.name}}" ng-click="filterData($event)" value="{{filter.name}}" />{{filter.text}}
+							</label>
+						</div>
+		 			</li>
+		 		</ul>
+		 	</div>
+
+			<olaf-search-result-data data="centers"></olaf-search-result-data>
+		</div>
+
+		<div ng-switch-when="details">
+			<p class="lead sr-title">{{ details.name }}</p>
+
+			<p ng-if="details.image">
+				<img src="/img/logos/{{details.image}}" />
+			</p>
+
+			<address ng-show="details.address">
+				{{details.address}}<br>
+				<a href="mailto:{{details.email}}" ng-if="details.email"><span class="glyphicon glyphicon-envelope"></span> {{details.email}}</a>
+			</address>
+			
+			<ul class="list-unstyled">
+				<li ng-show="details.phone"><p><span class="glyphicon glyphicon-earphone"></span> {{details.phone | phone}}<p></li>
+				<li ng-show="details.web"><p><span class="glyphicon glyphicon-globe"></span> <a href="{{details.web}}" target="_blank" >Web</a></p></li>
+				<li ng-show="details.courts"><p><span class="glyphicon glyphicon-th-list"></span> Pistas {{details.courts}}</p></li>
+				<li ng-show="details.booking"><p><span class="glyphicon glyphicon-check"></span> <a href="{{details.booking}}">Reserva Online</a></p></li>
+			</ul>
+
+			<span>Más pistas</span>
+			<ul>
+				<li ng-repeat="location in details.locations" ng-show="location.type !== 'country'">
+					<a href="/pistas-de-padel/{{location.friendly}}">{{location.name}}</a>
+				</li>
+			</ul>
+				
+		</div>
+	</div>
+</div>

@@ -1,0 +1,8 @@
+* {
+	font-family: "Arial"
+}
+
+@font-face {
+    font-family: "Padel War";
+    src: url(/fonts/wareagle.ttf) format("truetype");
+}

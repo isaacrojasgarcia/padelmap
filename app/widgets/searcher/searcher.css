@@ -1,0 +1,31 @@
+.olaf-searcher {
+	margin: 70px 0;
+}
+
+.olaf-results .olaf-searcher {
+	margin: 10px 0;
+}
+
+.searcher-title {
+	text-align: center;
+	font-family: 'Padel War';
+	font-size: 30px;
+	color: #FFF;
+}
+
+.spain-map-container {
+	display: none;
+}
+
+.olaf-searcher .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus {
+	background-color: #87ba37;
+	background-image: -webkit-linear-gradient(top, #CD3434 0, #CD3434 100%);
+	background-image: linear-gradient(to bottom, #CD3434 0, #CD3434 100%);
+}
+
+@media (min-width: 992px) {
+  	.spain-map-container {
+  		text-align: center;
+  		display: inline;
+	}
+}

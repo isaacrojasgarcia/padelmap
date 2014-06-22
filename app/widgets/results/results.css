@@ -1,0 +1,41 @@
+.olaf-results .sr-container {
+	position: relative;
+}
+
+.olaf-results .sr-searcher {
+	position: absolute;
+	top: 30px;
+	left: 35px;
+	right: 10px;
+	z-index: 10;
+}
+
+.olaf-results .map-container {
+	display: block;
+}
+
+.olaf-results .angular-google-map-container { 
+	height: 500px;
+}
+
+@media (min-width: 400px) {
+	.olaf-results .sr-searcher {
+		left: 80px;
+	}
+
+	.olaf-results .data-container.closed {
+		right: -250px;
+	}	
+}
+
+@media (min-width: 992px) {
+	.olaf-results .sr-searcher {
+		top: 5px;
+	}
+
+	@media (min-height: 800px) {
+		.olaf-results .angular-google-map-container { 
+			height: 700px;
+		}
+	}
+}

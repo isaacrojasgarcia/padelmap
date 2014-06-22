@@ -1,0 +1,20 @@
+<div class="olaf-results">
+	<div class="sr-container">
+		<div class="sr-searcher">
+			<olaf-searcher></olaf-searcher>
+		</div>
+
+		<div class="map-container">
+			<google-map center="map.center" zoom="map.zoom" draggable="true" >
+				<markers models="markers.data" coords="'geometry'" icon="'icon'" doCluster="markers.doClusterRandomMarkers" 
+					clusterOptions="map.clusterOptions" click="'onClick'" labelContent="'title'" labelAnchor="22 0">
+					<windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
+						<div ng-non-bindable>{{name}}</div>
+					</windows>
+				</markers>
+			</google-map>
+		</div>
+
+		<olaf-search-result></olaf-search-result>
+	</div>
+</div>

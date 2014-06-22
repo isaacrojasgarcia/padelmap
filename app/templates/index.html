@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html id="ng-app" lang="{{ lang }}" ng-app="olaf">
+    <head>
+        <meta charset="utf-8">
+        <meta name="fragment" content="!">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta property="og:url" content="https://www.padeltotal.es/">
+        <meta property="og:title" content="Padel Total | by Lt.">
+        <meta property="og:image" content="">
+        <meta property="og:description" content="Padel Total">
+        <meta property="fb:app_id" content="">
+        <title ng-bind="title">{{site.title}}</title>
+        <meta name="description" content="{{site.description}}">
+        <link rel="stylesheet" href="/css/padel.min.css">
+    </head>
+    <body class="{{ bodyClass }}" ng-cloak ng-controller="bodyCtrl">
+        <olaf-header></olaf-header>
+        <div ng-view></div>
+        <olaf-footer></olaf-footer>
+        <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+        <script src="/js/vendor<%= minSuffix %>.js"></script>
+        <script src="/js/padel<%= minSuffix %>.js"></script>
+    </body>
+</html>

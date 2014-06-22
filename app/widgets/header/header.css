@@ -1,0 +1,29 @@
+.olaf-header {
+	border-bottom: 5px solid #CD3434;
+	padding: 10px 0 20px;
+}
+
+.logo-compact {
+	height: 57px;
+	-webkit-transition: height cubic-bezier(.42, 0, .58, 1) 5s;
+    -moz-transition: height cubic-bezier(.42, 0, .58, 1) 5s;
+    -o-transition: height cubic-bezier(.42, 0, .58, 1) 5s;
+    transition: height cubic-bezier(.42, 0, .58, 1) 5s;
+}
+
+a.home-title-wrapper {
+	text-decoration: none;
+	color: #2E2E2E;
+}
+
+.home-title {
+	font-family: "Padel War", Verdana;
+	font-size: 30px;
+	text-shadow: 4px 4px 2px rgba(130, 130, 130, 1);
+}
+
+.home-image {
+	background: url(/img/home_image.jpg);
+	background-size: cover;
+	height: 500px;
+}

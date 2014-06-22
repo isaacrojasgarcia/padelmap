@@ -1,0 +1,24 @@
+<div class="olaf-searcher row">
+	<div class="col-md-6" ng-class="{ 'col-md-offset-3': searcherType == 'H' }">
+		<p class="searcher-title" ng-show="searcherType == 'H'">
+			+1000 Pistas de Pádel
+		</p>
+		<div class="input-group" ng-class="{ 'input-group-lg': type == 'H' }">
+			<input type="text" 
+				ng-model="locationSelected" placeholder="Dónde quieres jugar?" ng-focus="type == 'H'"
+				typeahead="location as location.title for location in locations | filter:{name:$viewValue}" 
+				typeahead-on-select="typeaheadSelected()"
+				typeahead-min-length="3" class="form-control">
+				<!-- typeahead-template-url="customTemplate.html"  -->
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">Buscar</button>
+			</span>
+		</div>
+	</div>
+	
+	<!-- 
+		TODO: Solve problems creating spain map instance
+		<div class="col-md-6" ng-show="type == 'H'">
+		<olaf-spain-map item="spain-map"></olaf-spain-map>
+	</div> -->
+</div>

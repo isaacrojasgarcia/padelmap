@@ -1,0 +1,15 @@
+{
+	"main": {
+		"PAGE_LOADED": "PAGE_LOADED"
+	},
+
+
+	"searcher": {
+		"LOCATION_SELECTED": "LOCATION_SELECTED"
+	},
+
+	"sr": {
+		"FILTER_APPLIED": "FILTER_APPLIED"
+	}
+
+}
