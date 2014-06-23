@@ -4,7 +4,7 @@
 			<li ng-repeat="center in data" class="list-group-item sr-data-item" 
 				ng-class="{'odd-line': $index % 2 != 0 }"
 				ng-show="($index + 1 ) > (pag.current - 1) * pag.length && ($index + 1) <= pag.current * pag.length">
-				<a href="/centros/{{center.friendly}}/{{center.id}}">{{$index + 1}}. {{ center.name | truncate:35 }}</a>
+				<a href="#" ng-click="selectCenter(center)">{{$index + 1}}. {{ center.name | truncate:35 }}</a>
 			</li>
 		</ul>
 

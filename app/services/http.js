@@ -5,7 +5,7 @@
         .factory('http', ['$q', '$http', httpFactory]);
 
     function httpFactory($q, $http) {
-         //Enable cross domain calls
+        //Enable cross domain calls
         // $http.defaults.useXDomain = true;
 
         //Remove the header used to identify ajax call  that would prevent CORS from working

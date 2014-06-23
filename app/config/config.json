@@ -5,5 +5,8 @@
     "api": {
     	"dev": "http://dev.padeltotal.es/api/",
     	"prd": "http://api.padeltotal.es/"
+    },
+    "localRepo": {
+    	"srPath": "olafSearchResultPath"
     }
 }

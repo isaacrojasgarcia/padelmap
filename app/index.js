@@ -8,7 +8,8 @@
         'olaf.templates', 
         'olaf.widgets', 
         'olaf.components', 
-        'olaf.services'
+        'olaf.services',
+        'olaf.common.utils'
     ];
 
     var mod = angular.module('olaf', dependecies);

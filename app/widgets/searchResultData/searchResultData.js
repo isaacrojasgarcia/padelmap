@@ -11,6 +11,10 @@
                 length: 10,
                 maxSize: 4
             };
+
+            $scope.selectCenter = function(center) {
+                events.$emit(events.sr.CENTER_SELECTED, center);
+            }
 	    }
 
 	    function olafSearchResultDataLink (scope, elm, attr) {

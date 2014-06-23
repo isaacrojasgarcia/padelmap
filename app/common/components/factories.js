@@ -4,7 +4,7 @@
     angular.module('olaf.components.factories', [])
         .factory('lodash', lodash)
         .factory('bind', bind);
-
+    
     function bind() {
         return function (scope, fn) {
             return function () {
@@ -21,5 +21,4 @@
         //Assumes lodash.js has already been loaded on the page
         return window._;
     }
-
 }());

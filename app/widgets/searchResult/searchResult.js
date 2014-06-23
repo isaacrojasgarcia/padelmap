@@ -41,7 +41,7 @@
             $scope.filtersApplied = [];
             $scope.filterData = function(event) {
                 getFilters(event.target);
-                $scope.centers = _.filter($scope.initCenters, function(item) {
+                $scope.centers = _.filter($scope.payload, function(item) {
                     return angular.equals(_.intersection($scope.filtersApplied, item.summary), $scope.filtersApplied);
                 });
 
