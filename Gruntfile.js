@@ -99,6 +99,10 @@ module.exports = function (grunt) {
                 src: ['<%= padel.app %>/services/*.js'],
                 dest: '<%= padel.tmp %>/services.js'
             },
+            models: {
+                src: ['<%= padel.app %>/models/*.js'],
+                dest: '<%= padel.tmp %>/models.js'
+            },
             components: {
                 src: ['<%= padel.app %>/common/components/**/*.js'],
                 dest: '<%= padel.tmp %>/components.js'
@@ -143,15 +147,6 @@ module.exports = function (grunt) {
                 src: ['<%= padel.app %>/config/events.json'],
                 dest: '<%= padel.tmp %>/events.js'
             },
-            locations: {
-                options: {
-                    banner: "(function() {\n" +
-                        "olaf.locations = ",
-                    footer: "})();"
-                },
-                src: ['<%= padel.app %>/config/locations.json'],
-                dest: '<%= padel.tmp %>/locations.js'
-            },
             app: {
                 options: {
                     banner: "(function(undefined){'use strict';\n",
@@ -163,11 +158,11 @@ module.exports = function (grunt) {
                 src: [
                     '<%= concat.config.dest %>', 
                     '<%= concat.events.dest %>', 
-                    '<%= concat.locations.dest %>', 
                     '<%= ngmodules.components.dest %>', 
                     '<%= ngmodules.utils.dest %>', 
                     '<%= ngmodules.widgets.dest %>', 
                     '<%= ngmodules.services.dest %>',
+                    '<%= ngmodules.models.dest %>',
                     '<%= ngtemplates.app.dest %>',
                     '<%= padel.app %>/index.js'
                 ],
@@ -250,6 +245,16 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            locations: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: [ '<%= padel.app %>/config/locations.json' ],
+                        dest: '<%= padel.dist %>/js/'
+                    }
+                ]
+            },
             fonts: {
                 files: [
                     {

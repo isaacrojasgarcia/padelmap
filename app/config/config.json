@@ -8,5 +8,27 @@
     },
     "localRepo": {
     	"srPath": "olafSearchResultPath"
+    },
+    "paths": {
+        "searchResult": "pistas-de-padel",
+        "details": "centros"
+    },
+    "locations": {
+        "madrid": {
+            "longitude": 40.4000,
+            "latitude": 3.6833
+        }
+    },
+    "maps": {
+        "zoom": {
+            "big": 13,
+            "small": 15
+        },
+        "clusterOptions": {
+            "gridSize": 60,
+            "ignoreHidden": true,
+            "minimumClusterSize": 2,
+            "imageSizes": [72]
+        }
     }
 }

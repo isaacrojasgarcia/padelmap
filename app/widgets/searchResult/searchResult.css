@@ -22,6 +22,7 @@
 
 .data-container .sr-title {
 	margin-bottom: 0;
+	text-transform: capitalize;
 }
 
 .data-container .pagination > .active > a {

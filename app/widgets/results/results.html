@@ -16,6 +16,28 @@
 			</google-map>
 		</div>
 
-		<olaf-search-result></olaf-search-result>
+		<div class="data-container bs-callout bs-callout-warning" ng-class="{'closed': !showSidePanel }">
+			<div class="close-icon">
+				<div>
+					<a href="#" ng-click="toggleCentersList()" 
+						tooltip="{{tooltipClose}}" tooltip-placement="bottom">
+						<span class="fa fa-lg" 
+							ng-class="{
+								'fa-angle-double-right': showSidePanel,
+								'fa-angle-double-left': !showSidePanel
+							}">
+						</span>
+					</a>
+				</div>
+				<div ng-show="resultype === 'list'">
+					<span class="fa fa-list"></span>
+				</div>
+			</div>
+
+			<div ng-switch="resultType">
+				<olaf-search-result ng-switch-when="list"></olaf-search-result>
+				<olaf-details ng-switch-when="details"></olaf-details>
+			</div>
+		</div>
 	</div>
 </div>

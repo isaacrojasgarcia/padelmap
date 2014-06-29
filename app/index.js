@@ -9,6 +9,7 @@
         'olaf.widgets', 
         'olaf.components', 
         'olaf.services',
+        'olaf.models',
         'olaf.common.utils'
     ];
 

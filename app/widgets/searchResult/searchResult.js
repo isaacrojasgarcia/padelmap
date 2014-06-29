@@ -6,9 +6,7 @@
 
     function OlafSearchResultDirective ($location, http, events, config) {
     	function olafSearchResultCtrl($rootScope, $scope) {
-	    	/* Filters */
-
-            // TODO: Remove hardcoding filters
+	    	// TODO: Remove hardcoding filters
             $scope.filters = [
                 {
                     name: 'school',
@@ -23,29 +21,24 @@
                     text: 'Reserva online'
                 }
             ];
+
+            $scope.pagination = {
+                current: 1,
+                length: 10,
+                maxSize: 4
+            };
             
 
-            /* Sidebar */
-
-            // Toggling side bar
-            $scope.showSidePanel = false;
-            $scope.toggleCentersList = function() {
-                $scope.showSidePanel = !$scope.showSidePanel;
-                $scope.tooltipClose = ($scope.showSidePanel ? "Ocultar" : "Mostrar") + " panel lateral";
-            };
-
-            $scope.toggleCentersList();
-
-
-            /* Filtering Data */
+            
+            // Filters            
             $scope.filtersApplied = [];
-            $scope.filterData = function(event) {
-                getFilters(event.target);
-                $scope.centers = _.filter($scope.payload, function(item) {
-                    return angular.equals(_.intersection($scope.filtersApplied, item.summary), $scope.filtersApplied);
-                });
+            $scope.filterData = filterData;
+            $scope.selectCenter = selectCenter;
 
-                events.$emit(events.sr.FILTER_APPLIED, $scope.centers);
+
+            function filterData(event) {
+                getFilters(event.target);
+                events.$emit(events.sr.FILTER_APPLIED, $scope.filtersApplied);
             };
 
             function getFilters(el) {
@@ -56,17 +49,18 @@
                     _.pull($scope.filtersApplied, el.value);
                 }                
             }
+
+            function selectCenter(center) {
+                events.$emit(events.sr.CENTER_SELECTED, center);
+            }
+
+            
             
 	    }
 
-	    function olafSearchResultLink (scope, elem, attrs) {
-
-	    }
-
-        return {
+	    return {
         	restrict: 'E',
         	templateUrl: '/widgets/searchResult/searchResult.html',
-            link: olafSearchResultLink,
             controller: ['$rootScope', '$scope', olafSearchResultCtrl ]
         };
     }

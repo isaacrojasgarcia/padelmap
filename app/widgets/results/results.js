@@ -1,42 +1,31 @@
 (function () {
     'use strict';
 
+    var olafResultsDependencies = [ '$location', 'http', 'events', 'config', 'olafLocation', 'localRepo', 'centersSvc', 'Location', OlafResultsDirective];
+
     var module = angular.module('olaf.widgets.results', ['ui.bootstrap', 'google-maps']);
-    module.directive('olafResults', ['$location', 'http', 'events', 'config', 'olafLocation', 'localRepo', OlafResultsDirective ]);
+    module.directive('olafResults', olafResultsDependencies);
     module.factory('olafLocation', ['$location', '$route', '$rootScope', '$timeout', locationFactory]);
 
-    function OlafResultsDirective ($location, http, events, config, olafLocation, localRepo) {
+    function OlafResultsDirective ($location, http, events, config, olafLocation, localRepo, centersSvc, Location) {
         function olafResultsCtrl($scope) {
             $scope.searcherType = "R";
-
-            /* Map */
-            var madrid = {
-                longitude: 40.4000,
-                latitude: 3.6833
-            };
-
-            var zoom = {
-                big: 13,
-                small: 15
-            }
-
-
+            
+            // Looking for location
+            $scope.location = Location.convertPathToLocation($location.path());
+            
             /* Main data */
-            $scope.payload = [];    // Original payload from API 
             $scope.centers = [];    // Since filters are complex I need a filtered centers list
             $scope.center = {};     // Current center in details view
-            $scope.empty = false;
             $scope.previousList = false;
+            $scope.loading = true;
+            $scope.showSidePanel = false;
+
 
             $scope.map = {
-                center: madrid,
-                zoom: zoom.big,
-                clusterOptions: {
-                    gridSize: 60,
-                    ignoreHidden: true,
-                    minimumClusterSize: 2,
-                    imageSizes: [72]
-                }
+                center: config.locations.madrid,
+                zoom: config.maps.zoom.big,
+                clusterOptions: config.maps.clusterOptions
             };
 
             $scope.markers = {
@@ -44,77 +33,80 @@
                 doClusterRandomMarkers: true
             };
 
-            $scope.goBack = function() {
-                $scope.resultType = 'list';
-                console.log('Getting localRepo:', localRepo.get(config.localRepo.srPath));
-                olafLocation.skipReload().path(localRepo.get(config.localRepo.srPath));
-            };
-
+            $scope.toggleCentersList = toggleCentersList;
+            $scope.goBack = goBack; 
             
+            var deregisters = [];
+            $scope.$on('$destroy', _.executor(deregisters));
 
+            deregisters.push(
+                events.$on(events.sr.FILTER_APPLIED, function(event, filters) {
+                    $scope.centers = centersSvc.applyFilters(filters)
+                    $scope.markers.data = getMarkers();
+                }),
 
-
-            events.$on(events.sr.CENTER_SELECTED, function(event, center) {
-                $scope.center = center;
-                $scope.resultType = 'details';
-                console.log(center);
-                var path = '/centros/' + center.friendly + '/' + center.id;
-                olafLocation.skipReload().path(path);
-            });
-            
-            events.$on(events.sr.FILTER_APPLIED, function(event, centers) {
-                $scope.markers.data = getMarkers(centers);
-            });
-
-
-            /* Location */
-
-            // Looking for location
-            var path = $location.path().split('/'),
-                srPath = path[2] + (path[3] ? '/' + path[3] : '');
-
-            
-
-            $scope.location = {
-                name: ''
-            };
-            
-            // Getting data from API
-            events.$on(events.searcher.LOCATION_SELECTED, function(event, loc) {
-                getData(loc);
-            });
+                events.$on(events.sr.CENTER_SELECTED, function(event, center) {
+                    $scope.center = center;
+                    $scope.resultType = 'details';
+                    var path = '/centros/' + center.friendly + '/' + center.id;
+                    olafLocation.skipReload().path(path);
+                })
+            );
 
 
 
 
             // Switching behaviour 
             $scope.$watch('resultType', function(value) {
-                console.log('Previous List:', $scope.previousList);
+                // console.log('Previous List:', $scope.previousList);
                 switch(value) {
                     case 'list':
                         if(!$scope.previousList) {
-                            localRepo.set(config.localRepo.srPath, path.join('/'));
+                            localRepo.set(config.localRepo.srPath, $location.path());
                             $scope.previousList = true;
-                            getData( { friendly: srPath } ); 
+                            
+                            centersSvc.getDataByLocation($scope.location).then(function(response) {
+                                $scope.location.name = response.location;
+                                $scope.centers = response.items;
+                                $scope.markers.data = getMarkers();
+                                $scope.loading = true;
+                            });
                         }
 
-                        $scope.map.zoom = zoom.big;
+                        $scope.map.zoom = config.maps.zoom.big;
                         break;
 
                     case 'details':
-                        getData( { id: $scope.previousList ?  $scope.center.id : _.last(path) } );    
+                        var id = $scope.center.id ? $scope.center.id : _.last(_.compact($location.path().split('/')));
+                        centersSvc.getCenterById(id).then(function(response) {
+                            $scope.center = response;
+
+                            _.extend($scope.map, {
+                                center: response.coordinates,
+                                zoom: config.maps.zoom.small
+                            });
+
+                            // Looking for booking url
+                            _.each(response.services, function(item) {
+                                if(item.abrev === 'booking') {
+                                    $scope.center.booking = item.feature;
+                                }
+                            });
+
+                        });
                         break;
                 }
             });
 
 
 
-
-
             /* Functions */
-            function getMarkers(data) {
+
+            // Markers functions
+            function getMarkers() {
                 var result = []
-                _.forEach(data, function(item) {
+            
+                _.forEach($scope.centers, function(item) {
                     // console.log(item);
                     result.push({
                         'geometry': item.coordinates,
@@ -126,67 +118,19 @@
                     });
                 });
 
-                $scope.map.center = result[0].geometry || madrid;
-                return result;
-            }
-
-            function getData(params) {
-                console.log('Getting data', params);
-                if(!_.isEmpty(params)) {
-                    var url = '', success, fail;
-                    switch($scope.resultType) {
-                        case 'list':
-                            url = config.apiUrl + 'centers/' + params.friendly;
-                            success = function(data) {
-                                $scope.location.name = data.location;
-                                $scope.payload = angular.copy(data.items);
-                                $scope.centers = data.items;
-                                $scope.markers.data = getMarkers(data.items);
-                                $scope.empty = false;
-                            };
-                            fail = function() {
-                                $scope.empty = true;        
-                            }
-                            break;
-
-                        case 'details':
-                            url = config.apiUrl + 'details/' + params.id;
-                            success = function(data) {
-                                $scope.details = data;
-                                _.extend($scope.map, {
-                                    center: data.coordinates,
-                                    zoom: zoom.small
-                                });
-
-                                // Looking for booking url
-                                _.each(data.services, function(item) {
-                                    if(item.abrev === 'booking') {
-                                        $scope.details.booking = item.feature;
-                                    }
-                                });
-
-                                // Locations
-                                _.each(data.locations, function(item) {
-
-                                });
-                                
-                            };
-                            fail = function() {
-
-                            }
-                            break;
-                    }
-
-                    http.get(url).then(success, fail);
+                if(result.length) {
+                    $scope.map.center = result[0].geometry || madrid;
                 }
+
+                return result;
             }
 
             function onClick(e) {
                 _.each($scope.markers.data, function(item) {
-                    console.log(item);
+                    // console.log(item);
                     item.showWindow = false;
                 });
-                console.log(this);
+                // console.log(this);
                 this.showWindow = true;
                 $scope.$apply();
             }
@@ -194,6 +138,19 @@
             function onClose(e) {
                 console.log('onCLose', e);
                 $scope.$apply();
+            }
+
+
+
+            function goBack() {
+                $scope.resultType = 'list';
+                // console.log('Getting localRepo:', localRepo.get(config.localRepo.srPath));
+                olafLocation.skipReload().path(localRepo.get(config.localRepo.srPath));
+            };
+
+            function toggleCentersList() {
+                $scope.showSidePanel = !$scope.showSidePanel;
+                $scope.tooltipClose = ($scope.showSidePanel ? "Ocultar" : "Mostrar") + " panel lateral";
             }
 
 	    }
