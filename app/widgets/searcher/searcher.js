@@ -26,7 +26,7 @@
         }
 
 	    function olafSearcherLink (scope, elm, attr) {
-	    	
+	       scope.showMap = attr.showMap || false;
 	    }
 
         return {
