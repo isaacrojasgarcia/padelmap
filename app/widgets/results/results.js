@@ -8,6 +8,17 @@
     module.factory('olafLocation', ['$location', '$route', '$rootScope', '$timeout', locationFactory]);
 
     function OlafResultsDirective ($location, http, events, config, olafLocation, localRepo, centersSvc, Location) {
+        return {
+            restrict: 'E',
+            templateUrl: '/widgets/results/results.html',
+            link: olafResultsLink,
+            controller: ['$scope', olafResultsCtrl ]
+        };
+
+        function olafResultsLink (scope, elem, attrs) {
+            scope.resultType = attrs.type || 'list';
+        }
+
         function olafResultsCtrl($scope) {
             $scope.searcherType = "R";
             
@@ -18,9 +29,7 @@
             $scope.centers = [];    // Since filters are complex I need a filtered centers list
             $scope.center = {};     // Current center in details view
             $scope.previousList = false;
-            $scope.loading = true;
             $scope.showSidePanel = false;
-
 
             $scope.map = {
                 center: config.locations.madrid,
@@ -36,6 +45,9 @@
             $scope.toggleCentersList = toggleCentersList;
             $scope.goBack = goBack; 
             
+
+
+            // ===== Events ===== //
             var deregisters = [];
             $scope.$on('$destroy', _.executor(deregisters));
 
@@ -48,13 +60,19 @@
                 events.$on(events.sr.CENTER_SELECTED, function(event, center) {
                     $scope.center = center;
                     $scope.resultType = 'details';
-                    var path = '/centros/' + center.friendly + '/' + center.id;
+                    var path = '/' + config.paths.details + '/' + center.friendly + '/' + center.id;
                     olafLocation.skipReload().path(path);
+                }),
+
+                events.$on(events.sr.GO_BACK_TO_LIST, function(event) {
+                    // console.log('GOING BACK');
+                    $scope.goBack();
                 })
             );
 
 
 
+            // ===== Watchers ===== //
 
             // Switching behaviour 
             $scope.$watch('resultType', function(value) {
@@ -69,7 +87,7 @@
                                 $scope.location.name = response.location;
                                 $scope.centers = response.items;
                                 $scope.markers.data = getMarkers();
-                                $scope.loading = true;
+                                events.$emit(events.sr.DATA_LOADED);
                             });
                         }
 
@@ -100,7 +118,7 @@
 
 
 
-            /* Functions */
+            // ==== Functions ==== //
 
             // Markers functions
             function getMarkers() {
@@ -111,7 +129,7 @@
                     result.push({
                         'geometry': item.coordinates,
                         'name': item.name,
-                        'friendly': item.friendly,
+                        'url': ['', config.paths.details, item.friendly].join('/'),
                         'showWindow': false,
                         'onClick': onClick,
                         'onClose': onClose
@@ -125,18 +143,20 @@
                 return result;
             }
 
-            function onClick(e) {
+            function onClick(event, element) {
+                console.log(element);
+
                 _.each($scope.markers.data, function(item) {
                     // console.log(item);
                     item.showWindow = false;
                 });
-                // console.log(this);
+                
                 this.showWindow = true;
                 $scope.$apply();
             }
 
-            function onClose(e) {
-                console.log('onCLose', e);
+            function onClose(event) {
+                console.log('onCLose', event);
                 $scope.$apply();
             }
 
@@ -154,17 +174,6 @@
             }
 
 	    }
-
-	    function olafResultsLink (scope, elem, attrs) {
-            scope.resultType = attrs.type || 'list';
-        }
-
-        return {
-        	restrict: 'E',
-        	templateUrl: '/widgets/results/results.html',
-            link: olafResultsLink,
-            controller: ['$scope', olafResultsCtrl ]
-        };
     }
 
     /**

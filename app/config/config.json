@@ -19,6 +19,20 @@
             "latitude": 3.6833
         }
     },
+    "filters": [
+        {
+            "name": "school",
+            "text": "Clases de pádel"
+        },
+        {
+            "name": "indoor",
+            "text": "Pistas cubiertas"
+        },
+        {
+            "name": "booking",
+            "text": "Reserva online"
+        }
+    ],
     "maps": {
         "zoom": {
             "big": 13,

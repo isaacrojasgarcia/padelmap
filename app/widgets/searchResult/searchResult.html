@@ -6,7 +6,7 @@
 
 	<p>
 		<i class="fa fa-spinner fa-spin" ng-hide="loading"></i>
-		<span ng-show="centers.length > 0">{{ centers.length }}</span> Pistas de Pádel
+		<span ng-show="centers.length">{{ centers.length }}</span> Pistas de Pádel
 	</p>
 
 	<div class="sr-filters">
@@ -36,7 +36,7 @@
 			</pagination>
 		</div>
 		<div ng-if="!centers.length">
-			No hay resultados para mostrar
+			No tenemos resultados para mostrartetío 
 		</div>
 	</div>
 </div>

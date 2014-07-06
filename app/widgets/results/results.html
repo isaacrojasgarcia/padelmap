@@ -7,10 +7,10 @@
 		<div class="map-container">
 			<google-map center="map.center" zoom="map.zoom" draggable="true" >
 				<markers models="markers.data" coords="'geometry'" icon="'icon'" doCluster="markers.doClusterRandomMarkers" 
-					clusterOptions="map.clusterOptions" click="'onClick'" labelContent="'title'" labelAnchor="22 0">
+					clusterOptions="map.clusterOptions" click="'onClick(this)'" labelContent="'title'" labelAnchor="22 0">
 					<windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
 						<div ng-non-bindable>{{name}}</div>
-						<div ng-non-bindable>{{friendly}}</div>
+						<div ng-non-bindable>{{url}}</div>
 					</windows>
 				</markers>
 			</google-map>
@@ -35,8 +35,8 @@
 			</div>
 
 			<div ng-switch="resultType">
-				<olaf-search-result ng-switch-when="list"></olaf-search-result>
-				<olaf-details ng-switch-when="details"></olaf-details>
+				<olaf-search-result centers="centers" location="location" ng-switch-when="list"></olaf-search-result>
+				<olaf-details center="center" previous="previousList" ng-switch-when="details"></olaf-details>
 			</div>
 		</div>
 	</div>
