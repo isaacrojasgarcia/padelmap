@@ -16,7 +16,7 @@
         };
 
         function olafResultsLink (scope, elem, attrs) {
-            scope.resultType = attrs.type || 'list';
+            scope.changeView(attrs.type || 'list');
         }
 
         function olafResultsCtrl($scope) {
@@ -29,7 +29,7 @@
             $scope.centers = [];    // Since filters are complex I need a filtered centers list
             $scope.center = {};     // Current center in details view
             $scope.previousList = false;
-            $scope.showSidePanel = false;
+            $scope.showSidePanel = true;
 
             $scope.map = {
                 center: config.locations.madrid,
@@ -42,8 +42,9 @@
                 doClusterRandomMarkers: true
             };
 
+            $scope.changeView = changeView;
             $scope.toggleCentersList = toggleCentersList;
-            $scope.goBack = goBack; 
+
             
 
 
@@ -58,31 +59,47 @@
                 }),
 
                 events.$on(events.sr.CENTER_SELECTED, function(event, center) {
-                    $scope.center = center;
-                    $scope.resultType = 'details';
-                    var path = '/' + config.paths.details + '/' + center.friendly + '/' + center.id;
-                    olafLocation.skipReload().path(path);
+                    centerSelected(center);
                 }),
 
                 events.$on(events.sr.GO_BACK_TO_LIST, function(event) {
-                    // console.log('GOING BACK');
-                    $scope.goBack();
+                    goBackToList();
                 })
             );
 
 
 
-            // ===== Watchers ===== //
+            // ==== Functions ==== //
 
-            // Switching behaviour 
-            $scope.$watch('resultType', function(value) {
-                // console.log('Previous List:', $scope.previousList);
+            // Markers functions
+            function getMarkers() {
+                var result = []
+                _.forEach($scope.centers, function(item) {
+                    // console.log(item);
+                    result.push(_.extend(item, {
+                        'showWindow': false,
+                        'onClick': onClickMarker
+                    }));
+                });
+                if(result.length) {
+                    $scope.map.center = result[0].coordinates || config.locations.madrid;
+                }
+                return result;
+            }
+
+            function onClickMarker() {
+                events.$emit(events.sr.CENTER_SELECTED, this.model);
+            }
+
+            function changeView(value) {
+                $scope.resultType = value;
+                //console.log('Changing view.', value);
+                //console.log('Previous list:', $scope.previousList);
+
                 switch(value) {
                     case 'list':
                         if(!$scope.previousList) {
                             localRepo.set(config.localRepo.srPath, $location.path());
-                            $scope.previousList = true;
-                            
                             centersSvc.getDataByLocation($scope.location).then(function(response) {
                                 $scope.location.name = response.location;
                                 $scope.centers = response.items;
@@ -92,12 +109,17 @@
                         }
 
                         $scope.map.zoom = config.maps.zoom.big;
-                        break;
+                    break;
 
                     case 'details':
                         var id = $scope.center.id ? $scope.center.id : _.last(_.compact($location.path().split('/')));
                         centersSvc.getCenterById(id).then(function(response) {
                             $scope.center = response;
+                            
+                            if(!$scope.previousList) {
+                                $scope.centers = [ response ];
+                                $scope.markers.data = getMarkers();    
+                            }
 
                             _.extend($scope.map, {
                                 center: response.coordinates,
@@ -112,60 +134,21 @@
                             });
 
                         });
-                        break;
+                    break;
                 }
-            });
-
-
-
-            // ==== Functions ==== //
-
-            // Markers functions
-            function getMarkers() {
-                var result = []
-            
-                _.forEach($scope.centers, function(item) {
-                    // console.log(item);
-                    result.push({
-                        'geometry': item.coordinates,
-                        'name': item.name,
-                        'url': ['', config.paths.details, item.friendly].join('/'),
-                        'showWindow': false,
-                        'onClick': onClick,
-                        'onClose': onClose
-                    });
-                });
-
-                if(result.length) {
-                    $scope.map.center = result[0].geometry || madrid;
-                }
-
-                return result;
             }
 
-            function onClick(event, element) {
-                console.log(element);
-
-                _.each($scope.markers.data, function(item) {
-                    // console.log(item);
-                    item.showWindow = false;
-                });
-                
-                this.showWindow = true;
-                $scope.$apply();
+            function centerSelected(center) {
+                var path = '/' + config.paths.details + '/' + center.friendly + '/' + center.id;
+                olafLocation.skipReload().path(path);
+                $scope.previousList = true;
+                $scope.center = center;
+                changeView('details');
             }
 
-            function onClose(event) {
-                console.log('onCLose', event);
-                $scope.$apply();
-            }
-
-
-
-            function goBack() {
-                $scope.resultType = 'list';
-                // console.log('Getting localRepo:', localRepo.get(config.localRepo.srPath));
+            function goBackToList() {
                 olafLocation.skipReload().path(localRepo.get(config.localRepo.srPath));
+                changeView('list');
             };
 
             function toggleCentersList() {
@@ -173,7 +156,7 @@
                 $scope.tooltipClose = ($scope.showSidePanel ? "Ocultar" : "Mostrar") + " panel lateral";
             }
 
-	    }
+        }
     }
 
     /**

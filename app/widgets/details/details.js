@@ -17,7 +17,8 @@
         };
 
     	function olafDetailsCtrl($scope, events) {
-    		$scope.goBack = function() {
+    		$scope.goBackToList = function(event) {
+                event.preventDefault();
 	    		events.$emit(events.sr.GO_BACK_TO_LIST, true);
 	    	}
 	    }

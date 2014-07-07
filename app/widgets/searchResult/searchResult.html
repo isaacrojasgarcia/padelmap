@@ -10,16 +10,17 @@
 	</p>
 
 	<div class="sr-filters">
-			<ul class="row list-unstyled">
-				<li ng-repeat="filter in filters" class="col-xs-4 col-md-4">
-					<div class="checkbox">
-					<label>
-						<input type="checkbox" name="filter-{{filter.name}}" ng-click="filterData($event)" value="{{filter.name}}" />{{ filter.text }}
-					</label>
-				</div>
-				</li>
-			</ul>
-		</div>
+		<ul class="row list-unstyled">
+			<li ng-repeat="filter in filters" class="col-xs-4 col-md-4">
+				<div class="checkbox">
+				<label>
+					<input type="checkbox" name="filter-{{filter.name}}" ng-click="filterData($event)" value="{{filter.name}}" />{{ filter.text }}
+				</label>
+			</div>
+			</li>
+		</ul>
+	</div>
+	
 	<div class="search-result-data">
 		<div ng-if="centers.length">
 			<ul class="list-group sr-data">

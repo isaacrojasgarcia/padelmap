@@ -18,6 +18,15 @@
 	height: 500px;
 }
 
+.selected-center {
+	position: absolute;
+	bottom: 20px;
+	left: 30px;
+	padding: 10px 20px;
+	background: white;
+	border-radius: 7px;
+}
+
 @media (min-width: 400px) {
 	.olaf-results .sr-searcher {
 		left: 80px;
