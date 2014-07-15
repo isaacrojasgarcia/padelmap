@@ -16,6 +16,7 @@
         };
 
         function olafResultsLink (scope, elem, attrs) {
+            // console.log('-->', attrs.type);
             scope.changeView(attrs.type || 'list');
         }
 
@@ -24,6 +25,7 @@
             
             // Looking for location
             $scope.location = Location.convertPathToLocation($location.path());
+            console.log('Location::', $scope.location);
             
             /* Main data */
             $scope.centers = [];    // Since filters are complex I need a filtered centers list
@@ -46,6 +48,15 @@
             $scope.toggleCentersList = toggleCentersList;
 
             
+
+
+            // ===== Events ===== //
+            $scope.$watch('resultType', function(value) {
+                $scope.isList = (value === 'list' || value == 'nearby');
+                console.log('isList:', $scope.isList);
+            });
+
+
 
 
             // ===== Events ===== //
@@ -97,45 +108,70 @@
                 //console.log('Previous list:', $scope.previousList);
 
                 switch(value) {
+                    case 'nearby':
                     case 'list':
+                        $scope.map.zoom = config.maps.zoom.big;
                         if(!$scope.previousList) {
                             localRepo.set(config.localRepo.srPath, $location.path());
-                            centersSvc.getDataByLocation($scope.location).then(function(response) {
-                                $scope.location.name = response.location;
-                                $scope.centers = response.items;
-                                $scope.markers.data = getMarkers();
-                                events.$emit(events.sr.DATA_LOADED);
-                            });
+                            getCentersInfo(value);
                         }
-
-                        $scope.map.zoom = config.maps.zoom.big;
                     break;
 
                     case 'details':
-                        var id = $scope.center.id ? $scope.center.id : _.last(_.compact($location.path().split('/')));
-                        centersSvc.getCenterById(id).then(function(response) {
-                            $scope.center = response;
-                            
-                            if(!$scope.previousList) {
-                                $scope.centers = [ response ];
-                                $scope.markers.data = getMarkers();    
-                            }
-
-                            _.extend($scope.map, {
-                                center: response.coordinates,
-                                zoom: config.maps.zoom.small
-                            });
-
-                            // Looking for booking url
-                            _.each(response.services, function(item) {
-                                if(item.abrev === 'booking') {
-                                    $scope.center.booking = item.feature;
-                                }
-                            });
-
-                        });
+                        getDetailedCenterInfo();
                     break;
                 }
+            }
+
+            function getCentersInfo(value) {
+                function afterData(response) {
+                    console.log('response after', value, response);
+                    $scope.location.name = response.location;
+                    $scope.centers = response.items;
+                    $scope.markers.data = getMarkers();
+                    events.$emit(events.sr.DATA_LOADED); 
+                }
+
+                switch(value) {
+                    case 'list':
+                        centersSvc.getDataByLocation($scope.location).then(afterData);
+                    break;
+
+                    case 'nearby': 
+                        var search = $location.search(),
+                            geoLocation = {
+                                latitude: search.lat,
+                                longitude: search.long
+                            };
+
+                        centersSvc.getDataNearby(geoLocation).then(afterData);
+                    break;
+                }
+            }
+
+            function getDetailedCenterInfo() {
+                var id = $scope.center.id ? $scope.center.id : _.last(_.compact($location.path().split('/')));
+                centersSvc.getCenterById(id).then(function(response) {
+                    $scope.center = response;
+                    
+                    if(!$scope.previousList) {
+                        $scope.centers = [ response ];
+                        $scope.markers.data = getMarkers();    
+                    }
+
+                    _.extend($scope.map, {
+                        center: response.coordinates,
+                        zoom: config.maps.zoom.small
+                    });
+
+                    // Looking for booking url
+                    _.each(response.services, function(item) {
+                        if(item.abrev === 'booking') {
+                            $scope.center.booking = item.feature;
+                        }
+                    });
+
+                });
             }
 
             function centerSelected(center) {

@@ -21,15 +21,17 @@
     mod.controller('bodyCtrl', [BodyCtrl]);
     
     function ConfigCtrl($routeProvider, $locationProvider, $httpProvider) {
-        var routes = [
-            ['/', { template: '<olaf-home></olaf-home>' }],
-            ['/pistas-de-padel/:city', { template: '<olaf-results></olaf-results>' }],
-            ['/pistas-de-padel/:city/:town', { template: '<olaf-results></olaf-results>' }],
-            ['/centros/:center/:id', { template: '<olaf-results type="details"></olaf-results>' }]
-        ];
+        var config = olaf.config,
+            routes = [
+                ['/', { template: '<olaf-home></olaf-home>' }],
+                ['/' + config.paths.nearby, { template: '<olaf-results type="nearby"></olaf-results>' }],
+                ['/' + config.paths.searchResult + '/:city', { template: '<olaf-results></olaf-results>' }],
+                ['/' + config.paths.searchResult + '/:city/:town', { template: '<olaf-results></olaf-results>' }],
+                ['/' + config.paths.details + '/:center/:id', { template: '<olaf-results type="details"></olaf-results>' }]
+            ];
 
         routes.forEach(function (row) {
-            $routeProvider.when('/:lang' + row[0], { redirectTo: row[0] });
+            // $routeProvider.when('/:lang' + row[0], { redirectTo: row[0] });
             $routeProvider.when(row[0], row[1]);
         });
 

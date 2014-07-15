@@ -6,12 +6,10 @@
 
     function OlafSpainMapDirective ($location, config) {
     	function olafSpainMapLink (scope, elem, attr) {
-            console.log('Spain map link fx')
-
             // Assuming that spain-map.js and raphael.js are loaded
             if(!scope.spainMap) {
                 scope.idMap = attr.item
-                console.log('MAP:', document.getElementById('spain-map'));
+                // console.log('MAP:', document.getElementById('spain-map'));
 
                 scope.spainMap = new SpainMap({
                     id               : attr.item,

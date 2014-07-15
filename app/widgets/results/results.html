@@ -38,8 +38,8 @@
 			</div>
 
 
-			<olaf-search-result centers="centers" location="location" ng-show="resultType === 'list'"></olaf-search-result>
-			<olaf-details center="center" previous="previousList" ng-show="resultType === 'details'"></olaf-details>
+			<olaf-search-result centers="centers" location="location" ng-show="!!isList"></olaf-search-result>
+			<olaf-details center="center" previous="previousList" ng-show="!isList"></olaf-details>
 
 		</div>
 	</div>

@@ -4,13 +4,19 @@
     },
     "api": {
     	"dev": "http://dev.padeltotal.es/api/",
-    	"prd": "http://api.padeltotal.es/"
+    	"prd": "http://api.padeltotal.es/",
+        "paths": {
+            "centers": "centers",
+            "details": "details",
+            "nearby": "nearto"
+        }
     },
     "localRepo": {
     	"srPath": "olafSearchResultPath"
     },
     "paths": {
         "searchResult": "pistas-de-padel",
+        "nearby": "pistas-de-padel-cercanas",
         "details": "centros"
     },
     "locations": {

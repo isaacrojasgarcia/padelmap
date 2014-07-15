@@ -10,12 +10,13 @@
         return {
             getCenterById: getCenterById,
             getDataByLocation: getDataByLocation,
-            applyFilters: applyFilters
+            applyFilters: applyFilters,
+            getDataNearby: getDataNearby
         };
 
 
         function getCenterById(id) {
-            var url = config.apiUrl + 'details/' + id,
+            var url = config.apiUrl + config.api.paths.details + '/' + id,
                 defer = $q.defer();
 
             makeCall(url, defer);
@@ -24,11 +25,25 @@
 
         // @param Location loc
         function getDataByLocation(loc) {
-            var url = config.apiUrl + 'centers/' + loc.getFriendly(),
+            var url = config.apiUrl + config.api.paths.centers + '/' + loc.getFriendly(),
                 defer = $q.defer();
 
             makeCall(url, defer, function(data) {
                 centers = data.items;
+            });
+
+            return defer.promise;
+        }
+
+        function getDataNearby(geoLocation) {
+            var url = config.apiUrl + config.api.paths.nearby + 
+                        '?latitude=' + geoLocation.latitude +
+                        '&longitude=' + geoLocation.longitude,
+                defer = $q.defer();
+
+            makeCall(url, defer, function(data) {
+                // console.log('data:', data);
+                centers = data.items
             });
 
             return defer.promise;

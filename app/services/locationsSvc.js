@@ -2,13 +2,12 @@
     'use strict';
 
     angular.module('olaf.services.locationsSvc', [])
-        .factory('locationsSvc', [ '$q', '$location', 'config', 'http', locationsSvcFactory ]);
+        .factory('locationsSvc', [ '$q', 'config', 'http', locationsSvcFactory ]);
 
-    function locationsSvcFactory($q, $location, config, http) {
+    function locationsSvcFactory($q, config, http) {
   
         return {
-            getLocations: getLocations,
-            setPath: setPath
+            getLocations: getLocations
         };
 
         function getLocations() {
@@ -23,10 +22,5 @@
 
             return defer.promise;
         }
-    
-        function setPath(locationSelected) {
-            $location.path('/' + config.paths.searchResult + '/' + locationSelected.friendly);
-        }
-
     }
 }());
