@@ -3,7 +3,7 @@
 		<div class="sr-searcher">
 			<olaf-searcher></olaf-searcher>
 		</div>
-
+		<div>ICON: {{userLocation.icon}}</div>
 		<div class="map-container">
 			<google-map center="map.center" zoom="map.zoom" draggable="true" fit="true">
 				<markers models="markers.data" coords="'coordinates'" icon="'icon'" doCluster="markers.doClusterRandomMarkers" 
@@ -12,12 +12,12 @@
 						<div ng-non-bindable>{{name}}</div>
 					</windows> -->
 				</markers>
+
+				<marker ng-if="isList" coords="userLocation.coords" icon="userLocation.icon">
+				</marker>
+
 			</google-map>
 		</div>
-
-		<!-- <div class="selected-center" ng-if="center.name">
-			Centro <a href="#" ng-click="goToCenter($event)">{{center.name}}</a>
-		</div> -->
 
 		<div class="data-container bs-callout bs-callout-warning" ng-class="{'closed': !showSidePanel }">
 			<div class="close-icon">

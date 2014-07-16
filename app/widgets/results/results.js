@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    var olafResultsDependencies = [ '$location', 'http', 'events', 'config', 'olafLocation', 'localRepo', 'centersSvc', 'Location', OlafResultsDirective];
+    var olafResultsDependencies = [ '$location', '$q', '$timeout', 'http', 'events', 'config', 'olafLocation', 'localRepo', 'centersSvc', 'Location', OlafResultsDirective];
 
     var module = angular.module('olaf.widgets.results', ['ui.bootstrap', 'google-maps']);
     module.directive('olafResults', olafResultsDependencies);
     module.factory('olafLocation', ['$location', '$route', '$rootScope', '$timeout', locationFactory]);
 
-    function OlafResultsDirective ($location, http, events, config, olafLocation, localRepo, centersSvc, Location) {
+    function OlafResultsDirective ($location, $q, $timeout, http, events, config, olafLocation, localRepo, centersSvc, Location) {
         return {
             restrict: 'E',
             templateUrl: '/widgets/results/results.html',
@@ -22,10 +22,6 @@
 
         function olafResultsCtrl($scope) {
             $scope.searcherType = "R";
-            
-            // Looking for location
-            $scope.location = Location.convertPathToLocation($location.path());
-            console.log('Location::', $scope.location);
             
             /* Main data */
             $scope.centers = [];    // Since filters are complex I need a filtered centers list
@@ -88,6 +84,7 @@
                 _.forEach($scope.centers, function(item) {
                     // console.log(item);
                     result.push(_.extend(item, {
+                        'icon': '/img/player.png',
                         'showWindow': false,
                         'onClick': onClickMarker
                     }));
@@ -125,15 +122,22 @@
 
             function getCentersInfo(value) {
                 function afterData(response) {
-                    console.log('response after', value, response);
-                    $scope.location.name = response.location;
+                    // console.log('response after', value, response);
+                    var defer = $q.defer();
+
+                    $scope.location.setName(response.location);
                     $scope.centers = response.items;
                     $scope.markers.data = getMarkers();
                     events.$emit(events.sr.DATA_LOADED); 
+
+                    $timeout(defer.resolve, 10);
+                    return defer.promise;
                 }
 
                 switch(value) {
                     case 'list':
+                        $scope.location = Location.convertPathToLocation($location.path());
+                        // console.log('Location::', $scope.location);
                         centersSvc.getDataByLocation($scope.location).then(afterData);
                     break;
 
@@ -144,7 +148,15 @@
                                 longitude: search.long
                             };
 
-                        centersSvc.getDataNearby(geoLocation).then(afterData);
+                        $scope.location = new Location();
+                        centersSvc.getDataNearby(geoLocation).then(afterData).then(function() {
+                            $scope.userLocation = {
+                                coords: geoLocation,
+                                icon: '/img/home.png'
+                            };
+
+                            $scope.map.center = geoLocation;
+                        });
                     break;
                 }
             }
@@ -156,7 +168,7 @@
                     
                     if(!$scope.previousList) {
                         $scope.centers = [ response ];
-                        $scope.markers.data = getMarkers();    
+                        $scope.markers.data = getMarkers();
                     }
 
                     _.extend($scope.map, {

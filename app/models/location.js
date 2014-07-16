@@ -19,7 +19,8 @@
     	}
 
     	Location.prototype = {
-    		getName: getName,
+            getName: getName,
+    		setName: setName,
     		getFriendly: getFriendly,
     		setDataFromFriendly: setDataFromFriendly
     	}
@@ -27,6 +28,9 @@
     	// Static
     	Location.convertPathToLocation = convertPathToLocation;
 
+        function setName(name) {
+            return this.attr.name = name;
+        }
 
     	function getName() {
     		return this.attr.name;
