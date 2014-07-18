@@ -42,7 +42,7 @@
 
             $scope.changeView = changeView;
             $scope.toggleCentersList = toggleCentersList;
-
+            $scope.userLocation = null;
             
 
 
@@ -74,8 +74,7 @@
                 })
             );
 
-
-
+            
             // ==== Functions ==== //
 
             // Markers functions
@@ -122,14 +121,11 @@
 
             function getCentersInfo(value) {
                 function afterData(response) {
-                    // console.log('response after', value, response);
                     var defer = $q.defer();
-
                     $scope.location.setName(response.location);
                     $scope.centers = response.items;
                     $scope.markers.data = getMarkers();
                     events.$emit(events.sr.DATA_LOADED); 
-
                     $timeout(defer.resolve, 10);
                     return defer.promise;
                 }
@@ -148,13 +144,18 @@
                                 longitude: search.long
                             };
 
+                        console.log('GM ani', google.maps.Animation);
+                        $scope.userLocation = {
+                            coords: geoLocation,
+                            icon: '/img/home.png',
+                            options: {
+                                draggable: true,
+                                animation: google.maps.Animation.BOUNCE
+                            }
+                        };
+
                         $scope.location = new Location();
                         centersSvc.getDataNearby(geoLocation).then(afterData).then(function() {
-                            $scope.userLocation = {
-                                coords: geoLocation,
-                                icon: '/img/home.png'
-                            };
-
                             $scope.map.center = geoLocation;
                         });
                     break;

@@ -16,7 +16,7 @@
             });
 
             $scope.typeaheadSelected = function() {
-                $location.path('/' + config.paths.searchResult + '/' + locationSelected.friendly);
+                $location.path('/' + config.paths.searchResult + '/' + $scope.locationSelected.friendly);
                 
                 // Doesn't work in the SR because it belogns to another parent directive
                 // It works when the searcher belogns to the same "page"

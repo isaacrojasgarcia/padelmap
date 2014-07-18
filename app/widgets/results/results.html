@@ -3,18 +3,20 @@
 		<div class="sr-searcher">
 			<olaf-searcher></olaf-searcher>
 		</div>
-		<div>ICON: {{userLocation.icon}}</div>
+		<!-- <div ng-if="isList">ICON: {{userLocation.coords}}</div> -->
 		<div class="map-container">
 			<google-map center="map.center" zoom="map.zoom" draggable="true" fit="true">
 				<markers models="markers.data" coords="'coordinates'" icon="'icon'" doCluster="markers.doClusterRandomMarkers" 
-					clusterOptions="map.clusterOptions" click="'onClick'" labelContent="'title'" labelAnchor="22 0">
-					<!-- <windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
-						<div ng-non-bindable>{{name}}</div>
-					</windows> -->
+					clusterOptions="map.clusterOptions" click="'onClick'" labelContent="'title'" labelAnchor="22 0">	
 				</markers>
 
-				<marker ng-if="isList" coords="userLocation.coords" icon="userLocation.icon">
+				<!-- <windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
+					<div ng-non-bindable>{{name}}</div>
+				</windows> -->
+
+				<marker ng-if="userLocation" coords="userLocation.coords" icon="userLocation.icon" options="userLocation.options">
 				</marker>
+				
 
 			</google-map>
 		</div>

@@ -19,7 +19,7 @@
     "momentjs": "~2.4.0",
     "moment-timezone": "~0.0.3",
     "marked": "~0.2.10",
-    "angular-google-maps": "~1.0.10",
+    "angular-google-maps": "~1.1.8",
     "angular-bootstrap": "0.10.0",
     "font-awesome": "4.0.3"
   },
@@ -27,8 +27,5 @@
     "angular-mocks": "1.2.8",
     "sinonjs": "1.7.3",
     "chai": "1.8.1"
-  },
-  "resolutions": {
-    "angular": "1.2.8"
   }
 }
