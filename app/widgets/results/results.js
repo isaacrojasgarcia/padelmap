@@ -32,7 +32,8 @@
             $scope.map = {
                 center: config.locations.madrid,
                 zoom: config.maps.zoom.big,
-                clusterOptions: config.maps.clusterOptions
+                clusterOptions: config.maps.clusterOptions,
+
             };
 
             $scope.markers = {
@@ -100,9 +101,8 @@
 
             function changeView(value) {
                 $scope.resultType = value;
-                //console.log('Changing view.', value);
-                //console.log('Previous list:', $scope.previousList);
-
+                //console.log('Changing view.', value, $scope.previousList);
+                
                 switch(value) {
                     case 'nearby':
                     case 'list':
@@ -144,15 +144,17 @@
                                 longitude: search.long
                             };
 
-                        console.log('GM ani', google.maps.Animation);
-                        $scope.userLocation = {
-                            coords: geoLocation,
-                            icon: '/img/home.png',
-                            options: {
-                                draggable: true,
-                                animation: google.maps.Animation.BOUNCE
+                        $scope.userLocation = [
+                            {
+                                id: 'home',
+                                coordinates: geoLocation,
+                                icon: '/img/home.png',
+                                options: {
+                                    // draggable: true,
+                                    // animation: google.maps.Animation.BOUNCE
+                                }
                             }
-                        };
+                        ];
 
                         $scope.location = new Location();
                         centersSvc.getDataNearby(geoLocation).then(afterData).then(function() {
