@@ -151,7 +151,7 @@
                                 icon: '/img/home.png',
                                 options: {
                                     // draggable: true,
-                                    // animation: google.maps.Animation.BOUNCE
+                                    animation: google.maps.Animation.BOUNCE
                                 }
                             }
                         ];
