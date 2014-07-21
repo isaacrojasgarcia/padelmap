@@ -50,5 +50,8 @@
             "minimumClusterSize": 2,
             "imageSizes": [72]
         }
+    },
+    "facebook": {
+        
     }
 }

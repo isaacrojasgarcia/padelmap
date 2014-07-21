@@ -17,7 +17,7 @@
     mod.config(['$routeProvider', '$locationProvider', '$httpProvider', ConfigCtrl]);
     
     //Register work which should be performed when the injector is done loading all modules.
-    mod.run(['$rootScope', RunCtrl])
+    mod.run(RunCtrl);
     mod.controller('bodyCtrl', [BodyCtrl]);
     
     function ConfigCtrl($routeProvider, $locationProvider, $httpProvider) {
@@ -44,11 +44,20 @@
         $locationProvider.hashPrefix('!');
     }
 
-    function RunCtrl($rootScope) {
+    RunCtrl.$inject = ['$rootScope', 'facebook'];
+    function RunCtrl($rootScope, facebook) {
         $rootScope.site = {
-            title: 'PadelTotal.es',
-            description: 'PT'
-        }
+            title: 'PadelWar.com',
+            description: '',
+            og: {
+                title: 'PadelWar | by Lt.',
+                url: 'https://www.padelwar.com/',
+                desc: '',
+
+            }
+        };
+
+        facebook.init();
     }
 
     function BodyCtrl() {
