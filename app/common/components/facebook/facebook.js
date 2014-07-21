@@ -9,7 +9,8 @@
     	var ready = false;
 
         return {
-        	init: init
+        	init: init,
+            login: login
         };
 
         function isReady() {
@@ -17,15 +18,17 @@
         }
 
         function init() {
+            var defer = $q.defer();
+
             window.fbAsyncInit = function() {
-                ready = true;
-                
                 FB.init({
                     appId      : '676547532428612',
                     xfbml      : true,
                     version    : 'v2.0'
                 });
 
+                ready = true;
+                defer.resolve();
             };
 
             (function(d, s, id){
@@ -35,10 +38,19 @@
                 js.src = "//connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
+
+            return defer.promise;
         }
 
         function login() {
-            if( isReady() ) {
+            if( !isReady() ) {
+                init().then(loginFunction);
+            }
+            else {
+                loginFunction();
+            }
+
+            function loginFunction() {
                 FB.getLoginStatus(function(response) {
                     if (response.status === 'connected') {
                         console.log('Logged in.');

@@ -57,7 +57,9 @@
             }
         };
 
-        facebook.init();
+        facebook.init().then(function() {
+            facebook.login();
+        });
     }
 
     function BodyCtrl() {
