@@ -18,7 +18,7 @@ module.exports = function (grunt) {
     };
 
     // To use the ’host’ argument, start the server using: grunt server --host=[your.hostname.here]
-    var devHost = argv.host || 'localhost';
+    var devHost = argv.host || 'dev.padelwar.com';
     var padelConfig = {
         //Open up to pass and environment key, defaults to ’dev’
         env: argv.env || 'dev',

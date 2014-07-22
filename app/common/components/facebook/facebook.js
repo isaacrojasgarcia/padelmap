@@ -2,7 +2,7 @@
     'use strict';
 
     var module = angular.module('olaf.components.facebook', []);
-    module.factory('facebook', [ '$q', OlafFacebookFactory ]);
+    module.factory('facebook', OlafFacebookFactory);
 
     OlafFacebookFactory.$inject = ['$q', 'config']
     function OlafFacebookFactory($q, config) {
@@ -19,10 +19,11 @@
 
         function init() {
             var defer = $q.defer();
+            console.log('CONFIG', config);
 
             window.fbAsyncInit = function() {
                 FB.init({
-                    appId      : '676547532428612',
+                    appId      : config.facebook.app.id,
                     xfbml      : true,
                     version    : 'v2.0'
                 });
