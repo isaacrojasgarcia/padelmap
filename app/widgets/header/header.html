@@ -7,4 +7,12 @@
 			</a>
 		</div>
 	</div>
+	<div>
+		<button class="btn btn-primary" ng-click="loginCall()" ng-if="!loginStatus">
+			Regístrate con Facebook
+		</button>
+		<div ng-if="!!loginStatus">
+			Bienvenido
+		</div>
+	</div>
 </div>

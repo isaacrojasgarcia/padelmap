@@ -44,8 +44,8 @@
         $locationProvider.hashPrefix('!');
     }
 
-    RunCtrl.$inject = ['$rootScope', 'facebook'];
-    function RunCtrl($rootScope, facebook) {
+    RunCtrl.$inject = ['$rootScope', 'Facebook'];
+    function RunCtrl($rootScope, Facebook) {
         $rootScope.site = {
             title: 'PadelWar.com',
             description: '',
@@ -57,9 +57,7 @@
             }
         };
 
-        facebook.init().then(function() {
-            facebook.login();
-        });
+        Facebook.init();
     }
 
     function BodyCtrl() {
