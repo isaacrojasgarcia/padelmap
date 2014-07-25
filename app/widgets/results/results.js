@@ -50,7 +50,7 @@
             // ===== Events ===== //
             $scope.$watch('resultType', function(value) {
                 $scope.isList = (value === 'list' || value == 'nearby');
-                console.log('isList:', $scope.isList);
+                // console.log('isList:', $scope.isList);
             });
 
 

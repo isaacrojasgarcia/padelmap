@@ -2,17 +2,17 @@
 	<div class="container">
 		<div class="col-md-4">
 			<a href="/" class="home-title-wrapper">
-				<img src="/img/logo.png" alt="Logo" ng-class="{ 'logo-compact': type == 'R' }" style="height:100px;"/>
+				<!-- <img src="/img/logo.png" alt="Logo" ng-class="{ 'logo-compact': type == 'R' }" style="height:100px;"/> -->
 				<span class="home-title">PadelWar</span><b>.es</b>
 			</a>
 		</div>
 	</div>
 	<div>
-		<button class="btn btn-primary" ng-click="loginCall()" ng-if="!loginStatus">
+		<button class="btn btn-primary" ng-click="loginCall()" ng-if="!user.connected">
 			Regístrate con Facebook
 		</button>
-		<div ng-if="!!loginStatus">
-			Bienvenido
+		<div ng-if="user.connected">
+			Bienvenido {{ user.first_name }}
 		</div>
 	</div>
 </div>
