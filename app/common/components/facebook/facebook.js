@@ -1,25 +1,46 @@
 (function () {
     'use strict';
 
-    var module = angular.module('olaf.components.facebook', []);
-    module.factory('facebook', OlafFacebookFactory);
+    var module = angular.module('olaf.components.Facebook', []);
+    module.service('Facebook', OlafFacebookService);
 
-    OlafFacebookFactory.$inject = ['$q', 'config']
-    function OlafFacebookFactory($q, config) {
-    	var ready = false;
+    OlafFacebookService.$inject = ['$q', 'config'];
+    function OlafFacebookService($q, config) {
+    	function Facebook() {
+            this.ready = false;
+            this.user = {};
+        }
 
-        return {
-        	init: init,
-            login: login
-        };
+        Facebook.init = init;
+        Facebook.isReady = isReady;
 
+        Facebook.login = methodFactory(login, 'login');
+        Facebook.getLoginStatus = methodFactory(getLoginStatus, 'getLoginStatus');
+        
+
+        // ===== Functions ==== //
         function isReady() {
-            return ready;
+            return Facebook.ready;
+        }
+
+        function methodFactory(callback, method) {
+            return function() {
+                var promise;
+
+                if(!isReady()) {
+                    promise = init().then(callback);
+                }
+                else {
+                    promise = callback();
+                }
+
+                return promise;
+            };
         }
 
         function init() {
             var defer = $q.defer();
-            console.log('CONFIG', config);
+            console.log('Initializing Facebook service');
 
             window.fbAsyncInit = function() {
                 FB.init({
@@ -28,8 +49,8 @@
                     version    : 'v2.0'
                 });
 
-                ready = true;
-                defer.resolve();
+                Facebook.ready = true;
+                defer.resolve();                
             };
 
             (function(d, s, id){
@@ -43,24 +64,48 @@
             return defer.promise;
         }
 
-        function login() {
-            if( !isReady() ) {
-                init().then(loginFunction);
-            }
-            else {
-                loginFunction();
-            }
+        function getLoginStatus() {
+            var defer = $q.defer();
+            FB.getLoginStatus(function(response) {
+                evalAuth(defer, response);
+            });
+            return defer.promise;
+        }
 
-            function loginFunction() {
-                FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected') {
-                        console.log('Logged in.');
-                    }
-                    else {
-                        FB.login();
-                    }
+        function login() {
+            var defer = $q.defer();
+            FB.login(function(response) {
+                evalAuth(defer, response);
+            });
+            return defer.promise;
+        }
+
+        function me() {
+            var defer = $q.defer();
+            FB.api('/me', function(me) {
+                defer.resolve(me);
+            });
+            return defer.promise;
+        }
+
+        
+
+
+        // ==== Private ==== //
+        function evalAuth(defer, response) {
+            if (response.authResponse) {
+                me().then(function(me) {
+                    defer.resolve(_.extend(response, {
+                        me: me
+                    }));
                 });
+            } 
+            else {
+                defer.resolve(response);
             }
         }
+
+        // ==== Returning Factory ==== //
+        return Facebook;
     }
 }());
