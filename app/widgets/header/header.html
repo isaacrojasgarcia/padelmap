@@ -13,6 +13,7 @@
 		</button>
 		<div ng-if="user.connected">
 			Bienvenido {{ user.first_name }}
+			<img ng-src="{{ user.picture.url }}" alt="profile picture"/>
 		</div>
 	</div>
 </div>

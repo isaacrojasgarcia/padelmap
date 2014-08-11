@@ -82,9 +82,25 @@
 
         function me() {
             var defer = $q.defer();
+
+            var meDeferred = $q.defer(),
+                picDeferred = $q.defer(),
+                promises = [meDeferred.promise, picDeferred.promise];
+
             FB.api('/me', function(me) {
+                meDeferred.resolve(me);
+            });
+
+            FB.api('/me/picture', function(me) {
+                picDeferred.resolve(me);
+            });
+
+            $q.all(promises).then(function(responses) {
+                console.log('double responses', responses);
+                var me = _.extend(responses[0], { picture: responses[1] && responses[1].data ? responses[1].data : responses[1] });
                 defer.resolve(me);
             });
+
             return defer.promise;
         }
 
