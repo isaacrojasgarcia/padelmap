@@ -24,6 +24,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['bundle']);
+
 gulp.task('run', ['bundle'], function() {
 	gulp.start('nodemon', 'watch');
 });
