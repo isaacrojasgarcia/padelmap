@@ -14,7 +14,7 @@
         "bcrypt": "~0.7.7",
         "consolidate": "~0.10.0",
         "express": "^3.4.8",
-        "mongoose": "latest",
+        "mongoose": "^3.9.1",
         "connect-mongo": "latest",
         "harp": "^0.11.2",
         "hogan.js": "~2.0.0",
@@ -38,6 +38,7 @@
     "devDependencies": {
         "gulp": "^3.8.1",
         "gulp-browserify": "^0.4.6",
-        "gulp-rename": "^1.2.0"
+        "gulp-rename": "^1.2.0",
+        "nodemon": "latest"
     }
 }
