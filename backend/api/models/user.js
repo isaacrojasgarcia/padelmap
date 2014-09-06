@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
 	Schema   = mongoose.Schema,
-	crypto   = require('crypto');
+	crypto   = require('crypto'),
+	oAuthTypes = ['github', 'twitter', 'facebook', 'google', 'linkedin'];
 
 var userSchema = new Schema({
 	name: { type: String, default: '' },
@@ -15,6 +16,20 @@ userSchema
 	.set(setPassword)
 	.get(getPassword);
 
+userSchema.pre('save', function(next) {
+	if (!this.isNew) return next();
+
+	console.log(this);
+
+
+	if ( !( validatePresenceOf(this.password) || this.doesNotRequireValidation() ) ) {
+		next(new Error('Invalid password'));
+	}
+	else {
+		next();
+	}
+});
+
 userSchema.methods = {
 	encryptPassword: encryptPassword,
 
@@ -28,7 +43,12 @@ userSchema.methods = {
 
 	doesNotRequireValidation: function() {
 		return ~oAuthTypes.indexOf(this.provider);
+	},
+
+	getName: function() {
+		return this.name;
 	}
+
 };
 
 mongoose.model('User', userSchema);
@@ -51,4 +71,8 @@ function encryptPassword(password) {
 	catch (err) {
 		return '';
 	}
+}
+
+function validatePresenceOf(value) {
+	return value && value.length;
 }
