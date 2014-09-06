@@ -20,7 +20,8 @@ var async = require('async')
 /**
  * Controllers
  */
-var landing = require('./controllers/landing');	
+var landingCtrl = require('./controllers/landing');
+var userCtrl = require('./controllers/user');
 
 
 /**
@@ -28,5 +29,8 @@ var landing = require('./controllers/landing');
  */
 module.exports = function (app, passport) {
 	// Home route
-	app.get('/', landing.index);
+	app.get('/', landingCtrl.index);
+
+	app.get('/user', userCtrl.index);
+	app.get('/user/new', userCtrl.create);
 };
