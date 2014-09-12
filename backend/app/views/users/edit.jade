@@ -1,0 +1,32 @@
+extends ./common
+
+block content
+	pre= user
+
+	form(action="/user/save", method="POST")
+		input(type='hidden', name='_csrf', value="#{csrf_token}")
+		input(type='hidden', name='_id', value="#{user._id}")
+
+		.form-group
+			label.col-sm-2.control-label(for="name") Name
+			.col-sm-10
+				input#name.form-control(type="text", placeholder="Name", name="name" value=user.name)
+
+		.form-group
+			label.col-sm-2.control-label(for="email") Email
+			.col-sm-10
+				input#email.form-control(type="email", placeholder="Email", name="email" value=user.email)
+
+		.form-group
+			label.col-sm-2.control-label(for="username") Username
+			.col-sm-10
+				input#username.form-control(type="text", placeholder="Username", name="username" value=user.username)
+
+		.form-group
+			label.col-sm-2.control-label(for="password") Password
+			.col-sm-10
+				input#password.form-control(type="password", placeholder="Password", name="password")
+
+		.form-group
+			.col-sm-10
+				button.btn.btn-primary(type="submit") Save

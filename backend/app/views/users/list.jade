@@ -1,0 +1,7 @@
+extends ./common
+
+block content
+	ul
+		each user, i in users
+			li
+				a(href = '/user/' + user.id)= (i + 1) + ': ' + user.name

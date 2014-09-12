@@ -1,0 +1,10 @@
+extends ../layout
+
+block main
+    h1 There was an error
+    br
+
+    block content
+        #error-message-box
+            #error-stack-trace
+                pre= error

@@ -22,7 +22,7 @@ function config(app, config, passport) {
     app.use(express.static(config.root + '/public'));
 
     // Set views path, template engine and default layout
-    app.set('views', config.root + '/api/views')
+    app.set('views', config.root + '/app/views')
     app.set('view engine', 'jade')
 
     app.configure(function () {

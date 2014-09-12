@@ -1,0 +1,12 @@
+extends ./layout
+
+block main
+    h1 Not found
+    br
+    span 404
+
+    block content
+        #error-message-box
+            #error-stack-trace
+                pre
+                    code!= error

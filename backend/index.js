@@ -32,7 +32,7 @@ var env      = process.env.NODE_ENV || 'dev',
 
 
 // Bootstraping models
-var modelsPath = __dirname + '/api/models';
+var modelsPath = __dirname + '/app/models';
 fs.readdirSync(modelsPath)
 	.forEach(function(file) {
 		console.log('registering model: ', file);
@@ -52,7 +52,7 @@ require('./config/express')(app, config, passport);
 
 
 // Bootstraping routes
-require('./api/routes')(app, passport);
+require('./app/routes')(app, passport);
 
 
 // Start the app by listening on <port>
