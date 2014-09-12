@@ -18,5 +18,5 @@ Server.prototype.init = function() {
 
 Server.prototype.router = function() {
 	var routes = require('./routes')(app);
-	app.use(express.static(__dirname + '/public'));
+	app.use(express.static(__dirname + 'dist'));
 };

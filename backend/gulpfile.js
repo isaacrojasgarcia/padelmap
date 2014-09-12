@@ -21,7 +21,7 @@ var clean = require('gulp-clean');
 gulp.task('styles', function () {
     gulp.src('app/**/*.css')
     	.pipe(concat('app.min.css'))
-        .pipe(cssmin())
+        // .pipe(cssmin())
         // .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('dist/css'));
 });
@@ -48,7 +48,5 @@ gulp.task('run', ['clean'], function() {
 	gulp.start('styles');
 	gulp.start('nodemon', 'watch');
 });
-
-
 
 gulp.task('default', ['styles']);
