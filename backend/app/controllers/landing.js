@@ -1,8 +1,7 @@
 var landing = {};
 
 landing.index = function(req, res) {
-	console.log('Index page');
-	res.send('Index page');
+	res.render('common/index', {});
 };
 
 module.exports = landing;
