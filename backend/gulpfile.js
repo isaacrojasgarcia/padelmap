@@ -23,7 +23,7 @@ gulp.task('styles', function () {
     	.pipe(concat('app.min.css'))
         // .pipe(cssmin())
         // .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('public/css'));
 });
 
 // Clean all builds
