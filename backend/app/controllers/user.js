@@ -4,14 +4,11 @@ var mongoose = require('mongoose'),
 	UserModel = mongoose.model('User');
 
 user.index = function(req, res, next) {
-	// res.send('Listing users page');
 	UserModel.find().exec(function (error, users) {
 		res.render('users/list', {
 		    title: 'Users list',
 		    users: users
 		});
-
-		//console.log('users', users);
 	});
 };
 

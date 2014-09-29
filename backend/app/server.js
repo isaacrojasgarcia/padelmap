@@ -18,5 +18,6 @@ Server.prototype.init = function() {
 
 Server.prototype.router = function() {
 	var routes = require('./routes')(app);
-	app.use(express.static(__dirname + 'dist'));
+	console.log(__dirname + '/../dist/');
+	app.use(express.static(__dirname + '/../dist/'));
 };
