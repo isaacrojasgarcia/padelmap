@@ -1,5 +1,23 @@
-div Backoffice Padel War
-	nav
-		ul
-			li 
-				a(href="/user") Users
+nav.navbar.navbar-default(role="navigation")
+    .container-fluid
+        .navbar-header
+            button.navbar-toggle.collapsed(data-toggle="collapse", data-target="#bar-collapse")
+                span.sr-only Toogle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand Padelwar Backoffice
+
+        #bar-collapse.collapse.navbar-collapse
+            ul.nav.navbar-nav
+                li
+                    a(href="/user") Users
+                li.dropdown
+                    a.dropdown-toggle(href="#", data-toggle="dropdown") Utils
+                        span.caret
+
+                    ul.dropdown-menu(role="menu")
+                        li 
+                            a Action
+                        li 
+                            a Another action

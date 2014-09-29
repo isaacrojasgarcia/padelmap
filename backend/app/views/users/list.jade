@@ -1,7 +1,17 @@
-extends ./common
+extends ../layout
 
 block content
-	ul
+	table.table
+		tr
+			th 
+			th Name
+			th Username
+			th Email
+
 		each user, i in users
-			li
-				a(href = '/user/' + user.id)= (i + 1) + ': ' + user.name
+			tr
+				td= (i + 1) 
+				td
+					a(href = '/user/' + user.id)= user.name
+				td= user.username
+				td= user.email

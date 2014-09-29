@@ -1,8 +1,6 @@
-extends ./common
+extends ../layout
 
 block content
-	pre= user
-
 	form(action="/user/save", method="POST")
 		input(type='hidden', name='_csrf', value="#{csrf_token}")
 		input(type='hidden', name='_id', value="#{user._id}")
@@ -30,3 +28,5 @@ block content
 		.form-group
 			.col-sm-10
 				button.btn.btn-primary(type="submit") Save
+
+	pre= user
