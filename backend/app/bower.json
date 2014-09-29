@@ -1,0 +1,16 @@
+{
+    "name": "my-project",
+    "version": "1.0.0",
+    "ignore": [
+        ".jshintrc",
+        "**/*.txt"
+    ],
+    "dependencies": {
+        "<name>": "<version>",
+        "<name>": "<folder>",
+        "<name>": "<package>"
+    },
+    "devDependencies": {
+        "<test-framework-name>": "<version>"
+    }
+}
