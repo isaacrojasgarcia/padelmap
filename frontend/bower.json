@@ -21,7 +21,7 @@
     "moment": "~2.6.0",
     "moment-timezone": "~0.0.6",
 
-    "angular-google-maps": "~1.1.8",
+    "angular-google-maps": "2.0.12",
     "angular-bootstrap": "0.12.0",
     "font-awesome": "4.0.3"
   },
