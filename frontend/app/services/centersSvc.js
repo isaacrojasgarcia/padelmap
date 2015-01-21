@@ -29,6 +29,7 @@
                 defer = $q.defer();
 
             makeCall(url, defer, function(data) {
+                // console.log('data:', data);
                 centers = data.items;
             });
 
@@ -36,13 +37,13 @@
         }
 
         function getDataNearby(geoLocation) {
-            var url = config.apiUrl + config.api.paths.nearby + 
+            var url = config.apiUrl + config.api.paths.nearby +
                         '?latitude=' + geoLocation.latitude +
                         '&longitude=' + geoLocation.longitude,
                 defer = $q.defer();
 
             makeCall(url, defer, function(data) {
-                // console.log('data:', data);
+                // console.log('data nearby:', data);
                 centers = data.items
             });
 
@@ -50,11 +51,12 @@
         }
 
         function makeCall(url, defer, successCallback, failCallback) {
+            // console.log('== Making a call', url);
             function success(data) {
                 if(successCallback) {
                     successCallback(data);
                 }
-                
+
                 defer.resolve(data);
             }
 

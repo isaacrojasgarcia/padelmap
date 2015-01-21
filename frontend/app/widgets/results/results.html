@@ -4,27 +4,39 @@
 			<olaf-searcher></olaf-searcher>
 		</div>
 		<div class="map-container">
-			<google-map center="map.center" zoom="map.zoom" fit="true" draggable="true">
-				<markers models="markers.data" coords="'coordinates'" icon="'icon'" doCluster="markers.doClusterRandomMarkers" 
-					clusterOptions="map.clusterOptions" click="'onClick'" labelContent="'title'" labelAnchor="22 0">
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" fit="true" draggable="true">
+				<ui-gmap-markers
+					models="map.markers"
+					coords="'coordinates'"
+					icon="'icon'"
+					doCluster="map.doClusterRandomMarkers"
+					clusterOptions="map.clusterOptions"
+					click="'onClick'"
+					labelContent="'title'"
+					labelAnchor="22 0">
 					<!-- <windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
 						<div ng-non-bindable>{{name}}</div>
 					</windows> -->
-				</markers>
+				</ui-gmap-markers>
 
 				<!-- <marker ng-if="userLocation" coords="userLocation.coords"  options="userLocation.options">
-				</marker> -->	
+				</marker> -->
 
-				<markers models="userLocation" coords="'coordinates'" icon="'icon'" options="'options'"></markers>
-			</google-map>
+				<!-- <ui-gmap-markers
+				 	models="userLocation"
+					coords="'coordinates'"
+					icon="'icon'"
+					options="'options'">
+				</ui-gmap-markers> -->
+			</ui-gmap-google-map>
 		</div>
 
 		<div class="data-container bs-callout bs-callout-warning" ng-class="{'closed': !showSidePanel }">
 			<div class="close-icon">
 				<div>
-					<a href="#" ng-click="toggleCentersList()" 
+					<a href="#" ng-click="toggleCentersList()"
 						tooltip="{{tooltipClose}}" tooltip-placement="bottom">
-						<span class="fa fa-lg" 
+						<span class="fa fa-lg"
 							ng-class="{
 								'fa-angle-double-right': showSidePanel,
 								'fa-angle-double-left': !showSidePanel
@@ -36,7 +48,6 @@
 					<span class="fa fa-list"></span>
 				</div>
 			</div>
-
 
 			<olaf-search-result centers="centers" location="location" ng-show="!!isList"></olaf-search-result>
 			<olaf-details center="center" previous="previousList" ng-show="!isList"></olaf-details>

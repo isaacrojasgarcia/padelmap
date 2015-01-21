@@ -20,24 +20,33 @@
 			</li>
 		</ul>
 	</div>
-	
+
 	<div class="search-result-data">
 		<div ng-if="centers.length">
 			<ul class="list-group sr-data">
-				<li ng-repeat="center in centers" class="list-group-item sr-data-item" 
+				<li ng-repeat="center in centers" class="list-group-item sr-data-item"
 					ng-class="{'odd-line': $index % 2 != 0 }"
 					ng-show="($index + 1 ) > (pagination.current - 1) * pagination.length && ($index + 1) <= pagination.current * pagination.length">
 					<a href="#" ng-click="selectCenter(center)">{{$index + 1}}. {{ center.name | truncate:35 }}</a>
 				</li>
 			</ul>
 
-			<pagination boundary-links="true" ng-show="centers.length > pagination.length" max-size="pagination.maxSize"
-				total-items="centers.length" items-per-page="pagination.length"
-				page="pagination.current" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+			<pagination
+				boundary-links="true"
+				ng-show="centers.length > pagination.length"
+				max-size="pagination.maxSize"
+				items-per-page="pagination.length"
+				total-items="centers.length"
+				ng-model="pagination.current"
+				class="pagination-sm"
+				previous-text="&lsaquo;"
+				next-text="&rsaquo;"
+				first-text="&laquo;"
+				last-text="&raquo;">
 			</pagination>
 		</div>
 		<div ng-if="!centers.length">
-			No tenemos resultados para mostrartetío 
+			No tenemos resultados para mostrartetío
 		</div>
 	</div>
 </div>

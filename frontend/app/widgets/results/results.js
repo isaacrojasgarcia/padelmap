@@ -1,18 +1,22 @@
 (function () {
     'use strict';
 
-    var olafResultsDependencies = [ '$location', '$q', '$timeout', 'http', 'events', 'config', 'olafLocation', 'localRepo', 'centersSvc', 'Location', OlafResultsDirective];
+    var module = angular.module('olaf.widgets.results', ['ui.bootstrap', 'uiGmapgoogle-maps']);
+    module.directive('olafResults', OlafResultsDirective);
+    module.factory('olafLocation', locationFactory);
 
-    var module = angular.module('olaf.widgets.results', ['ui.bootstrap', 'google-maps']);
-    module.directive('olafResults', olafResultsDependencies);
-    module.factory('olafLocation', ['$location', '$route', '$rootScope', '$timeout', locationFactory]);
+    OlafResultsDirective.$inject = [
+        '$location', '$q', '$timeout', 'http', 'events', 'config', 'olafLocation',
+        'localRepo', 'centersSvc', 'Location', 'Map', 'Results'];
 
-    function OlafResultsDirective ($location, $q, $timeout, http, events, config, olafLocation, localRepo, centersSvc, Location) {
+    function OlafResultsDirective (
+            $location, $q, $timeout, http, events, config, olafLocation,
+            localRepo, centersSvc, Location, Map, Results) {
         return {
             restrict: 'E',
             templateUrl: '/widgets/results/results.html',
             link: olafResultsLink,
-            controller: ['$scope', olafResultsCtrl ]
+            controller: olafResultsCtrl
         };
 
         function olafResultsLink (scope, elem, attrs) {
@@ -20,32 +24,22 @@
             scope.changeView(attrs.type || 'list');
         }
 
+        olafResultsCtrl.$inject = ['$scope'];
         function olafResultsCtrl($scope) {
             $scope.searcherType = "R";
-            
+
             /* Main data */
             $scope.centers = [];    // Since filters are complex I need a filtered centers list
             $scope.center = {};     // Current center in details view
             $scope.previousList = false;
             $scope.showSidePanel = true;
 
-            $scope.map = {
-                center: config.locations.madrid,
-                zoom: config.maps.zoom.big,
-                clusterOptions: config.maps.clusterOptions,
-
-            };
-
-            $scope.markers = {
-                data: [],
-                doClusterRandomMarkers: true
-            };
+            $scope.map = new Map();
+            console.log('Creating MAP', $scope.map);
 
             $scope.changeView = changeView;
             $scope.toggleCentersList = toggleCentersList;
             $scope.userLocation = null;
-            
-
 
             // ===== Events ===== //
             $scope.$watch('resultType', function(value) {
@@ -63,7 +57,7 @@
             deregisters.push(
                 events.$on(events.sr.FILTER_APPLIED, function(event, filters) {
                     $scope.centers = centersSvc.applyFilters(filters)
-                    $scope.markers.data = getMarkers();
+                    $scope.map.markers = getMarkers();
                 }),
 
                 events.$on(events.sr.CENTER_SELECTED, function(event, center) {
@@ -75,7 +69,7 @@
                 })
             );
 
-            
+
             // ==== Functions ==== //
 
             // Markers functions
@@ -89,9 +83,11 @@
                         'onClick': onClickMarker
                     }));
                 });
+
                 if(result.length) {
-                    $scope.map.center = result[0].coordinates || config.locations.madrid;
+                    $scope.map.setCenter(result[0].coordinates);
                 }
+
                 return result;
             }
 
@@ -102,7 +98,7 @@
             function changeView(value) {
                 $scope.resultType = value;
                 //console.log('Changing view.', value, $scope.previousList);
-                
+
                 switch(value) {
                     case 'nearby':
                     case 'list':
@@ -122,10 +118,11 @@
             function getCentersInfo(value) {
                 function afterData(response) {
                     var defer = $q.defer();
+                    console.log(response);
                     $scope.location.setName(response.location);
                     $scope.centers = response.items;
-                    $scope.markers.data = getMarkers();
-                    events.$emit(events.sr.DATA_LOADED); 
+                    $scope.map.markers = getMarkers();
+                    events.$emit(events.sr.DATA_LOADED);
                     $timeout(defer.resolve, 10);
                     return defer.promise;
                 }
@@ -137,7 +134,7 @@
                         centersSvc.getDataByLocation($scope.location).then(afterData);
                     break;
 
-                    case 'nearby': 
+                    case 'nearby':
                         var search = $location.search(),
                             geoLocation = {
                                 latitude: search.lat,
@@ -168,7 +165,7 @@
                 var id = $scope.center.id ? $scope.center.id : _.last(_.compact($location.path().split('/')));
                 centersSvc.getCenterById(id).then(function(response) {
                     $scope.center = response;
-                    
+
                     if(!$scope.previousList) {
                         $scope.centers = [ response ];
                         $scope.markers.data = getMarkers();
@@ -204,7 +201,7 @@
 
             function toggleCentersList() {
                 $scope.showSidePanel = !$scope.showSidePanel;
-                $scope.tooltipClose = ($scope.showSidePanel ? "Ocultar" : "Mostrar") + " panel lateral";
+                $scope.tooltipClose = ($scope.showSidePanel ? "Ocultar" : "Mostrar");
             }
 
         }
@@ -216,6 +213,7 @@
      *
      *  TODO: Move to some sort of “Angular extension” file
      */
+    locationFactory.$inject = ['$location', '$route', '$rootScope', '$timeout'];
     function locationFactory($location, $route, $rootScope, $timeout) {
         $location.skipReload = function () {
             var lastRoute = $route.current,

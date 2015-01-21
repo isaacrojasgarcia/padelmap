@@ -4,7 +4,7 @@
     var dependecies = [
         'ngRoute',
         'ngAnimate',
-        'google-maps',
+        'uiGmapgoogle-maps',
         'olaf.templates',
         'olaf.widgets',
         'olaf.components',
