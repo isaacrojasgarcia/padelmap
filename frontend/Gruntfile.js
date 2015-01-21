@@ -156,11 +156,11 @@ module.exports = function (grunt) {
                     footer: '\n}());'
                 },
                 src: [
-                    '<%= concat.config.dest %>', 
-                    '<%= concat.events.dest %>', 
-                    '<%= ngmodules.components.dest %>', 
-                    '<%= ngmodules.utils.dest %>', 
-                    '<%= ngmodules.widgets.dest %>', 
+                    '<%= concat.config.dest %>',
+                    '<%= concat.events.dest %>',
+                    '<%= ngmodules.components.dest %>',
+                    '<%= ngmodules.utils.dest %>',
+                    '<%= ngmodules.widgets.dest %>',
                     '<%= ngmodules.services.dest %>',
                     '<%= ngmodules.models.dest %>',
                     '<%= ngtemplates.app.dest %>',
@@ -187,7 +187,7 @@ module.exports = function (grunt) {
                     '<%= padel.bower %>/angular-route/angular-route.js',
                     '<%= padel.bower %>/angular-sanitize/angular-sanitize.js',
                     '<%= padel.bower %>/angular-i18n/angular-locale_es.js',
-                    '<%= padel.bower %>/angular-google-maps/dist/angular-google-maps.min.js',
+                    '<%= padel.bower %>/angular-google-maps/dist/angular-google-maps.js',
                     '<%= padel.bower %>/angular-bootstrap/ui-bootstrap.js',
                     '<%= padel.bower %>/angular-bootstrap/ui-bootstrap-tpls.js',
                     '<%= padel.app %>/common/plugins/*.js'
@@ -227,14 +227,14 @@ module.exports = function (grunt) {
                     banner: '/* <%= padel.banner %> */\n'
                 },
                 files: {
-                    '<%= padel.dist %>/css/padel.min.css': 
+                    '<%= padel.dist %>/css/padel.min.css':
                         [
-                            '<%= padel.bower %>/bootstrap/dist/css/bootstrap.css', 
-                            '<%= padel.bower %>/bootstrap/dist/css/bootstrap-theme.css', 
-                            '<%= padel.bower %>/font-awesome/css/font-awesome.min.css', 
-                            '<%= padel.app %>/assets/css/**/*.css', 
-                            '<%= padel.app %>/common/components/**/*.css', 
-                            '<%= padel.app %>/common/utils/**/*.css', 
+                            '<%= padel.bower %>/bootstrap/dist/css/bootstrap.css',
+                            '<%= padel.bower %>/bootstrap/dist/css/bootstrap-theme.css',
+                            '<%= padel.bower %>/font-awesome/css/font-awesome.min.css',
+                            '<%= padel.app %>/assets/css/**/*.css',
+                            '<%= padel.app %>/common/components/**/*.css',
+                            '<%= padel.app %>/common/utils/**/*.css',
                             '<%= padel.app %>/widgets/**/**/*.css'
                         ]
                 }
@@ -257,7 +257,7 @@ module.exports = function (grunt) {
                         expand: true,
                         flatten: true,
                         src: [
-                            '<%= padel.app %>/assets/fonts/*', 
+                            '<%= padel.app %>/assets/fonts/*',
                             '<%= padel.bower %>/bootstrap/dist/fonts/*',
                             '<%= padel.bower %>/font-awesome/fonts/*'
                         ],
@@ -381,5 +381,5 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['default', 'jshint', 'karma']);
     grunt.registerTask('server', ['default', 'connect:server', 'concurrent:dev']);
 
-    
+
 };
