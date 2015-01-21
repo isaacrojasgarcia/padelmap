@@ -35,8 +35,7 @@
             $scope.showSidePanel = true;
 
             $scope.map = new Map();
-            console.log('Creating MAP', $scope.map);
-
+            
             $scope.changeView = changeView;
             $scope.toggleCentersList = toggleCentersList;
             $scope.userLocation = null;
