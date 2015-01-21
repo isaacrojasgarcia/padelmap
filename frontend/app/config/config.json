@@ -3,7 +3,7 @@
         "name": "PadelTotal"
     },
     "api": {
-    	"dev": "http://dev.padeltotal.es/api/",
+    	"dev": "http://www.padeltotal.es/api/",
     	"prd": "http://api.padeltotal.es/",
         "paths": {
             "centers": "centers",
