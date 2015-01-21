@@ -13,8 +13,7 @@
             connected: false
         };
 
-        $scope.loginCall = loginCall;
-
+        // $scope.loginCall = loginCall;
         // // TODO: Improve then add Facebook connection
         // Facebook.getLoginStatus().then(successfulConnect);
         //

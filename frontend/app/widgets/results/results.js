@@ -35,7 +35,7 @@
             $scope.showSidePanel = true;
 
             $scope.map = new Map();
-            
+
             $scope.changeView = changeView;
             $scope.toggleCentersList = toggleCentersList;
             $scope.userLocation = null;
@@ -117,7 +117,6 @@
             function getCentersInfo(value) {
                 function afterData(response) {
                     var defer = $q.defer();
-                    console.log(response);
                     $scope.location.setName(response.location);
                     $scope.centers = response.items;
                     $scope.map.markers = getMarkers();
