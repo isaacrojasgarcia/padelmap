@@ -1,25 +1,26 @@
 (function () {
     'use strict';
-    
+
     var dependecies = [
-        'ngRoute', 
-        'ngAnimate', 
-        'google-maps', 
-        'olaf.templates', 
-        'olaf.widgets', 
-        'olaf.components', 
+        'ngRoute',
+        'ngAnimate',
+        'google-maps',
+        'olaf.templates',
+        'olaf.widgets',
+        'olaf.components',
         'olaf.services',
         'olaf.models',
         'olaf.common.utils'
     ];
 
     var mod = angular.module('olaf', dependecies);
-    mod.config(['$routeProvider', '$locationProvider', '$httpProvider', ConfigCtrl]);
-    
+    mod.config(ConfigCtrl);
+
     //Register work which should be performed when the injector is done loading all modules.
     mod.run(RunCtrl);
     mod.controller('bodyCtrl', [BodyCtrl]);
-    
+
+    ConfigCtrl.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
     function ConfigCtrl($routeProvider, $locationProvider, $httpProvider) {
         var config = olaf.config,
             routes = [
@@ -61,6 +62,6 @@
     }
 
     function BodyCtrl() {
-        
+
     }
 })();
