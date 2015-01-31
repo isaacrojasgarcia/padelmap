@@ -1,3 +1,9 @@
+/* Setting up the map to height 100% */
+body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-map, .angular-google-map-container {
+	height: 100%;
+}
+
+
 .olaf-results .sr-container {
 	position: relative;
 }
@@ -14,8 +20,12 @@
 	display: block;
 }
 
-.olaf-results .angular-google-map-container { 
-	height: 500px;
+.olaf-results .angular-google-map-container {
+	/*height: 500px;*/
+}
+
+.olaf-results .close-icon {
+	display: none;
 }
 
 .selected-center {
@@ -34,7 +44,7 @@
 
 	.olaf-results .data-container.closed {
 		right: -250px;
-	}	
+	}
 }
 
 @media (min-width: 992px) {
@@ -43,8 +53,8 @@
 	}
 
 	@media (min-height: 800px) {
-		.olaf-results .angular-google-map-container { 
-			height: 700px;
+		.olaf-results .angular-google-map-container {
+
 		}
 	}
 }

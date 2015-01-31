@@ -2,6 +2,10 @@
 	padding: 20px 0;
 	color: #FFF;
 	background: #CD3434;
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
 }
 
 .olaf-footer div {
