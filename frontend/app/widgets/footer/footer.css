@@ -1,13 +1,30 @@
 .olaf-footer {
-	padding: 20px 0;
-	color: #FFF;
-	background: #CD3434;
 	position: absolute;
 	right: 0;
 	left: 0;
 	bottom: 0;
+	z-index: 20;
 }
 
-.olaf-footer div {
-	font-family: "Padel War";
+.olaf-footer .olaf-tabs {
+	position: absolute;
+	bottom: 80px;
+	width: 100%;
+	padding: 10px 0;
 }
+
+.olaf-footer .foot {
+	background: #CD3434;
+	color: #FFF;
+	padding: 20px 0;
+}
+
+@media (min-width: 992px) {
+	.olaf-tabs {
+		display: none;
+	}
+}
+
+/*.olaf-footer div {
+	font-family: "Padel War";
+}*/

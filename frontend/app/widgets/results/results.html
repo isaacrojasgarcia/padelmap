@@ -1,16 +1,20 @@
 <div class="olaf-results">
 	<olaf-header></olaf-header>
 	<div class="sr-container">
-		<div class="searcher-container">
+		<div class="searcher-container" ng-class="{ 'mobile-hide-tab': !mobileListView }">
 			<olaf-searcher></olaf-searcher>
 		</div>
 
-		<div class="map-container">
+		<div class="map-container" ng-class="{ 'mobile-hide-tab': !!mobileListView }">
 			<olaf-map map="map"></olaf-map>
 		</div>
 
 		<div class="data-container bs-callout bs-callout-warning"
-			ng-class="{ 'closed': !showSidePanel, 'opened': !!showSidePanel }">
+			ng-class="{
+					'closed': !showSidePanel,
+					'opened': !!showSidePanel,
+					'mobile-hide-tab': !mobileListView
+				}">
 
 			<olaf-search-result centers="centers" location="location" ng-show="!!isList"></olaf-search-result>
 			<olaf-details center="center" previous="previousList" ng-show="!isList"></olaf-details>

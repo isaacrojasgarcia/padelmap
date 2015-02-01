@@ -14,5 +14,10 @@
 		"GO_BACK_TO_LIST": "GO_BACK_TO_LIST",
 		"DATA_LOADED": "DATA_LOADED",
 		"CLICKING_ON_MAP": "CLICKING_ON_MAP"
+	},
+
+	"footer": {
+		"MAP_VIEW": "MAP_VIEW",
+		"LIST_VIEW": "LIST_VIEW"
 	}
 }

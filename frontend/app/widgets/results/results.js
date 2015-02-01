@@ -39,6 +39,7 @@
             $scope.changeView = changeView;
             $scope.toggleCentersList = toggleCentersList;
             $scope.userLocation = null;
+            $scope.mobileListView = false;
 
             // ===== Events ===== //
             $scope.$watch('resultType', function(value) {
@@ -65,6 +66,16 @@
 
                 events.$on(events.sr.GO_BACK_TO_LIST, function(event) {
                     goBackToList();
+                }),
+
+                events.$on(events.footer.LIST_VIEW, function(event) {
+                    $scope.mobileListView = true;
+                    console.log('LIST_VIEW', $scope.mobileListView);
+                }),
+
+                events.$on(events.footer.MAP_VIEW, function(event) {
+                    $scope.mobileListView = false;
+                    console.log('MAP_VIEW', $scope.mobileListView);
                 })
             );
 

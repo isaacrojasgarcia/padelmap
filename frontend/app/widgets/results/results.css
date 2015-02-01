@@ -37,6 +37,10 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	border-radius: 7px;
 }
 
+.mobile-hide-tab {
+	display: none!important;
+}
+
 @media (min-width: 400px) {
 	.olaf-results .searcher-container {
 		left: 80px;
@@ -51,4 +55,10 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	.olaf-results .data-container.closed {
 		right: -330px;
 	}
+
+	.olaf-results .mobile-hide-tab {
+		display: block!important;
+	}
+
+
 }
