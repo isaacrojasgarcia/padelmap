@@ -10,7 +10,7 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 
 .olaf-results .searcher-container {
 	position: absolute;
-	top: 80px;
+	top: 50px;
 	left: 35px;
 	right: 10px;
 	z-index: 10;
@@ -59,6 +59,4 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	.olaf-results .mobile-hide-tab {
 		display: block!important;
 	}
-
-
 }

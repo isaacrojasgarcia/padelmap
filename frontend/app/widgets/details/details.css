@@ -1,1 +1,11 @@
+.details-container {
+    margin-bottom: 150px;
+}
 
+
+
+@media (min-width: 992px) {
+    .details-container {
+        margin-bottom: 0px;
+    }
+}

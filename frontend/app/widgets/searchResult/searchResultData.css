@@ -4,7 +4,7 @@
 }
 
 .sr-data {
-	min-height: 260px;
+	/*min-height: 260px;*/
 }
 
 .sr-data-item {
@@ -21,6 +21,10 @@
 	color: #FFF;
 }
 
+.search-result-data {
+	margin-bottom: 150px;
+}
+
 .search-result-data .pagination {
 	margin: 0;
 }
@@ -34,5 +38,9 @@
 		.sr-data-item {
 			/*font-size: 12px;*/
 		}
+	}
+
+	.search-result-data {
+		margin-bottom: 0px;
 	}
 }
