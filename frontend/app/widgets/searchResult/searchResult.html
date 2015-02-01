@@ -1,15 +1,13 @@
 <div>
-	<div class="sr-title-container">
-		<p class="lead sr-title">
-			<i class="fa fa-spinner fa-spin" ng-hide="loading"></i>
-			{{ location.getName() }}
-		</p>
+	<h1 class="sr-title">
+		<i class="fa fa-spinner fa-spin" ng-hide="loading"></i>
+		{{ location.getName() }}
+	</h1>
 
-		<p>
-			<i class="fa fa-spinner fa-spin" ng-hide="loading"></i>
-			<span ng-show="centers.length">{{ centers.length }}</span> Pistas de Pádel
-		</p>
-	</div>
+	<p class="lead">
+		<i class="fa fa-spinner fa-spin" ng-hide="loading"></i>
+		<span ng-show="centers.length">{{ centers.length }}</span> Pistas de Pádel
+	</p>
 
 	<div class="sr-filters hidden">
 		<ul class="row list-unstyled">

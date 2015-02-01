@@ -1,52 +1,38 @@
 <div class="olaf-results">
 	<div class="sr-container">
-		<div class="sr-searcher">
+		<div class="searcher-container">
 			<olaf-searcher></olaf-searcher>
-		</div>
-		<div class="data-container bs-callout bs-callout-warning"
-			ng-class="{ 'closed': !showSidePanel, 'opened': !!showSidePanel }">
-			<!-- Close icon hidden -->
-			<div class="close-icon">
-				<div>
-					<a href="#" ng-click="toggleCentersList()"
-						tooltip="{{tooltipClose}}" tooltip-placement="bottom">
-						<span class="fa fa-lg"
-							ng-class="{
-								'fa-angle-double-right': showSidePanel,
-								'fa-angle-double-left': !showSidePanel
-							}">
-						</span>
-					</a>
-				</div>
-				<div ng-show="resultype === 'list'">
-					<span class="fa fa-list"></span>
-				</div>
-			</div>
-
-			<olaf-search-result centers="centers" location="location" ng-show="!!isList"></olaf-search-result>
-			<olaf-details center="center" previous="previousList" ng-show="!isList"></olaf-details>
 		</div>
 
 		<div class="map-container">
-			<ui-gmap-google-map center="map.center" zoom="map.zoom" fit="true" draggable="true">
-				<ui-gmap-markers
-				models="map.markers"
-				coords="'coordinates'"
-				icon="'icon'"
-				doCluster="map.doClusterRandomMarkers"
-				clusterOptions="map.clusterOptions"
-				click="'onClick'"
-				labelContent="'title'"
-				labelAnchor="22 0">
-				<!-- <windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
-					<div ng-non-bindable>{{name}}</div>
-				</windows> -->
-				</ui-gmap-markers>
+			<olaf-map map="map"></olaf-map>
+		</div>
 
-				<!-- <marker ng-if="userLocation" coords="userLocation.coords"  options="userLocation.options"></marker> -->
+		<div class="data-container bs-callout bs-callout-warning"
+			ng-class="{ 'closed': !showSidePanel, 'opened': !!showSidePanel }">
 
-				<!-- <ui-gmap-markers models="userLocation" coords="'coordinates'" icon="'icon'" options="'options'"></ui-gmap-markers> -->
-			</ui-gmap-google-map>
-		</div>		
+			<olaf-search-result centers="centers" location="location" ng-show="!!isList"></olaf-search-result>
+			<olaf-details center="center" previous="previousList" ng-show="!isList"></olaf-details>
+
+
+			<div class="close-icon bg-primary">
+				<a href="#" ng-click="toggleCentersList()"
+					tooltip="{{tooltipClose}}" tooltip-placement="bottom">
+					<span class="fa fa-lg fa-3x"
+						ng-class="{
+							'fa-arrow-right': showSidePanel,
+							'fa-arrow-left': !showSidePanel
+						}">
+
+						<!-- ng-class="{
+							'fa-angle-double-right': showSidePanel,
+							'fa-angle-double-left': !showSidePanel
+						}" -->
+					</span>
+				</a>
+			</div>
+		</div>
+
+
 	</div>
 </div>

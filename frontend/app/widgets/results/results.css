@@ -8,9 +8,9 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	position: relative;
 }
 
-.olaf-results .sr-searcher {
+.olaf-results .searcher-container {
 	position: absolute;
-	top: 30px;
+	top: 80px;
 	left: 35px;
 	right: 10px;
 	z-index: 10;
@@ -38,13 +38,13 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 }
 
 @media (min-width: 400px) {
-	.olaf-results .sr-searcher {
+	.olaf-results .searcher-container {
 		left: 80px;
 	}
 }
 
 @media (min-width: 992px) {
-	.olaf-results .sr-searcher {
+	.olaf-results .searcher-container {
 		top: 5px;
 	}
 

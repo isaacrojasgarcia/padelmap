@@ -1,18 +1,16 @@
-<div>
-	<div class="sr-title-container">
-		<p class="lead sr-title">{{ center.name }}</p>
+<div class="details-container">
+	<h1 class="sr-title">{{ center.name }}</h1>
 
-		<p ng-if="center.image">
-			<img src="/img/logos/{{center.image}}" />
-		</p>
-	</div>
-
+	<p ng-if="center.image">
+		<img src="/img/logos/{{center.image}}" />
+	</p>
+	
 	<address ng-show="center.address">
 		{{center.address}}<br>
 		<a href="mailto:{{center.email}}" ng-if="center.email"><span class="glyphicon glyphicon-envelope"></span> {{center.email}}</a>
 	</address>
 
-	<ul class="list-unstyled">
+	<ul>
 		<li ng-show="center.phone"><p><span class="glyphicon glyphicon-earphone"></span> {{center.phone | phone}}<p></li>
 		<li ng-show="center.web"><p><span class="glyphicon glyphicon-globe"></span> <a href="{{center.web}}" target="_blank" >Web</a></p></li>
 		<li ng-show="center.courts"><p><span class="glyphicon glyphicon-th-list"></span> Pistas {{center.courts}}</p></li>
