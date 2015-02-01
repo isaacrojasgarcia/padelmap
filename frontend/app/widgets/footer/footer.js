@@ -8,9 +8,8 @@
 
         olafFooterCtrl.$inject = ['$scope', 'events'];
 	    function olafFooterCtrl($scope, events) {
-            $scope.changeTabMode = function(ev) {
-                ev.preventDefault();
-                var view = ev.target.className === 'list-view' ? 'LIST' : 'MAP';
+            $scope.changeTabMode = function(type) {
+                var view = (type === 'list-view' ? 'LIST' : 'MAP');
                 events.$emit(events.footer[view + '_VIEW']);
             }
 	    }

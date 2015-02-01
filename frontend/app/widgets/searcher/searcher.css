@@ -2,6 +2,10 @@
 	margin: 70px 0;
 }
 
+.olaf-searcher .dropdown-menu {
+	z-index: 20;
+}
+
 .olaf-results .olaf-searcher {
 	margin: 10px 0;
 }

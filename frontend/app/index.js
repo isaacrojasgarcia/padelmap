@@ -58,10 +58,12 @@
             }
         };
 
-        Facebook.init();
+        // Facebook.init();
     }
 
     function BodyCtrl() {
 
     }
+
+    console.log('yeah');
 })();

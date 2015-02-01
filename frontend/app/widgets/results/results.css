@@ -4,6 +4,14 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 }
 
 
+.olaf-results {
+	overflow:scroll;
+}
+
+.olaf-results h1{
+	font-size: 22px;
+}
+
 .olaf-results .sr-container {
 	position: relative;
 }
@@ -13,7 +21,7 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	top: 50px;
 	left: 35px;
 	right: 10px;
-	z-index: 10;
+	z-index: 19;
 }
 
 .olaf-results .map-container {
@@ -59,4 +67,14 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	.olaf-results .mobile-hide-tab {
 		display: block!important;
 	}
+
+	.sr-fix-ios {
+		display:none;
+	}
+
+	.olaf-results h1{
+		font-size: 32px;
+	}
+
+
 }

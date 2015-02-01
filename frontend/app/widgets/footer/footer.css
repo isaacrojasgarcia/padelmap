@@ -11,7 +11,9 @@
 	bottom: 60px;
 	width: 100%;
 	padding: 15px 0;
-	background: blanchedalmond;
+	background: #FFF;
+	opacity: .8;
+	color: #CD3434;
 }
 
 .olaf-footer .foot {

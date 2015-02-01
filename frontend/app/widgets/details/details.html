@@ -4,7 +4,7 @@
 	<p ng-if="center.image">
 		<img src="/img/logos/{{center.image}}" />
 	</p>
-	
+
 	<address ng-show="center.address">
 		{{center.address}}<br>
 		<a href="mailto:{{center.email}}" ng-if="center.email"><span class="glyphicon glyphicon-envelope"></span> {{center.email}}</a>
@@ -25,4 +25,6 @@
 	</ul>
 
 	<p ng-if="!!previous"><a href="#" ng-click="goBackToList($event)">Volver</a></p>
+
+	<div class="sr-fix-ios">.</div>
 </div>
