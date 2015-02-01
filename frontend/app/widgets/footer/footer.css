@@ -8,9 +8,10 @@
 
 .olaf-footer .olaf-tabs {
 	position: absolute;
-	bottom: 80px;
+	bottom: 60px;
 	width: 100%;
-	padding: 10px 0;
+	padding: 15px 0;
+	background: blanchedalmond;
 }
 
 .olaf-footer .foot {

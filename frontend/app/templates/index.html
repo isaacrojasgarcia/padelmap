@@ -12,13 +12,13 @@
         <meta property="fb:app_id" content="{{ site.og.id }}">
 
         <meta name="description" content="{{ site.desc }}">
-        <link rel="stylesheet" href="/css/padel.min.css">
+        <link rel="stylesheet" href="/css/padel.min.css?v=<%= commitId %>">
     </head>
     <body class="{{ bodyClass }}" ng-cloak ng-controller="bodyCtrl">
         <div ng-view></div>
         <olaf-footer></olaf-footer>
         <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
         <script src="/js/vendor<%= minSuffix %>.js"></script>
-        <script src="/js/padel<%= minSuffix %>.js"></script>
+        <script src="/js/padel<%= minSuffix %>.js?v=<%= commitId %>"></script>
     </body>
 </html>
