@@ -1,0 +1,21 @@
+<ui-gmap-google-map center="map.center" zoom="map.zoom" fit="true" draggable="true">
+    <ui-gmap-markers
+        models="map.markers"
+        coords="'coordinates'"
+        icon="'icon'"
+        doCluster="map.doClusterRandomMarkers"
+        clusterOptions="map.clusterOptions"
+        click="'onClick'"
+        labelContent="'title'"
+        labelAnchor="22 0">
+        <!-- <windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
+            <div ng-non-bindable>{{name}}</div>
+        </windows> -->
+    </ui-gmap-markers>
+
+    <!-- <marker ng-if="userLocation"
+    coords="userLocation.coords"  options="userLocation.options"></marker> -->
+
+    <!-- <ui-gmap-markers models="userLocation"
+    coords="'coordinates'" icon="'icon'" options="'options'"></ui-gmap-markers> -->
+</ui-gmap-google-map>
