@@ -4,12 +4,11 @@
 	bottom: 0;
 	right: 0;
 	z-index: 10;
-	border-left: 2px solid #CD3434;
 	background: #FFF;
 	opacity: .95;
 	width: 100%;
 	padding: 5px 0 0 5px;
-	padding-left: 25px;
+	padding: 0 10px;
 }
 
 .data-container.opened {
@@ -74,5 +73,6 @@
 	.olaf-results .data-container {
 		top: 85px;
 		width: 400px;
+		border-left: 2px solid #CD3434;
 	}
 }
