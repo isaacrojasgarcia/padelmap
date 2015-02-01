@@ -11,8 +11,17 @@
 	padding: 5px 0 0 5px;
 }
 
+.data-container.opened {
+	right: 0;
+	-webkit-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	-moz-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	-ms-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	-o-transition: 300ms cubic-bezier(.42,0,.58,1) right;
+	transition: 300ms cubic-bezier(.42,0,.58,1) right;
+}
+
 .data-container.closed {
-	right: -265px;
+	right: 0;
 	-webkit-transition: 300ms cubic-bezier(.42,0,.58,1) right;
 	-moz-transition: 300ms cubic-bezier(.42,0,.58,1) right;
 	-ms-transition: 300ms cubic-bezier(.42,0,.58,1) right;

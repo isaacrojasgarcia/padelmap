@@ -1,9 +1,11 @@
 <div>
-	<p class="lead sr-title">{{ center.name }}</p>
+	<div class="sr-title-container">
+		<p class="lead sr-title">{{ center.name }}</p>
 
-	<p ng-if="center.image">
-		<img src="/img/logos/{{center.image}}" />
-	</p>
+		<p ng-if="center.image">
+			<img src="/img/logos/{{center.image}}" />
+		</p>
+	</div>
 
 	<address ng-show="center.address">
 		{{center.address}}<br>

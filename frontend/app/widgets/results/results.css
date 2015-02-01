@@ -41,10 +41,6 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 	.olaf-results .sr-searcher {
 		left: 80px;
 	}
-
-	.olaf-results .data-container.closed {
-		right: -250px;
-	}
 }
 
 @media (min-width: 992px) {
@@ -52,9 +48,7 @@ body, .ng-scope, .olaf-results, .sr-container, .map-container, .angular-google-m
 		top: 5px;
 	}
 
-	@media (min-height: 800px) {
-		.olaf-results .angular-google-map-container {
-
-		}
+	.olaf-results .data-container.closed {
+		right: -330px;
 	}
 }
