@@ -64,6 +64,4 @@
     function BodyCtrl() {
 
     }
-
-    console.log('yeah');
 })();
