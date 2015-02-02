@@ -374,7 +374,14 @@ module.exports = function (grunt) {
 
     grunt.initConfig(gruntConfig);
 
-    grunt.registerTask('scripts', ['ngtemplates', 'ngmodules', 'concat', 'uglify', 'clean:temp']);  // Uglify for prd
+    var scripts = ['ngtemplates', 'ngmodules', 'concat'];
+    // Uglify for prd
+    if(padelConfig.env == 'prod') {
+        scripts.push('uglify');
+    }
+    scripts.push('clean:temp');
+
+    grunt.registerTask('scripts', scripts);
     grunt.registerTask('styles', ['cssmin']);
 
     grunt.registerTask('default', ['clean', 'copy', 'template:html', 'scripts', 'styles']);
