@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="/css/padel.min.css?v=<%= commitId %>">
     </head>
     <body class="{{ bodyClass }} no-scroll" ng-cloak ng-controller="bodyCtrl">
+        <olaf-header></olaf-header>
         <div ng-view></div>
         <olaf-footer></olaf-footer>
         <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>

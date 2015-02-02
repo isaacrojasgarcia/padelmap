@@ -1,5 +1,5 @@
 .olaf-searcher {
-	margin: 70px 0;
+	margin: 70px 25px;
 }
 
 .olaf-searcher .dropdown-menu {
@@ -28,6 +28,10 @@
 }
 
 @media (min-width: 992px) {
+	.olaf-searcher {
+		margin: 70px 0;
+	}
+
   	.spain-map-container {
   		text-align: center;
   		display: inline;

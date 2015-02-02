@@ -20,7 +20,7 @@
         };
 
         function olafResultsLink (scope, elem, attrs) {
-            // console.log('-->', attrs.type);
+            console.log('-->', attrs.type);
             scope.changeView(attrs.type || 'list');
         }
 
@@ -44,7 +44,7 @@
             // ===== Events ===== //
             $scope.$watch('resultType', function(value) {
                 $scope.isList = (value === 'list' || value == 'nearby');
-                // console.log('isList:', $scope.isList);
+                console.log('isList:', $scope.isList);
             });
 
 

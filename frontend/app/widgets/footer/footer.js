@@ -6,8 +6,14 @@
 
     function OlafFooterDirective () {
 
-        olafFooterCtrl.$inject = ['$scope', 'events'];
-	    function olafFooterCtrl($scope, events) {
+        olafFooterCtrl.$inject = ['$scope', '$location', 'events'];
+	    function olafFooterCtrl($scope, $location, events) {
+            $scope.showTabs = true;
+            $scope.$on('$routeChangeSuccess', function () {
+                console.log('chnaging route', $location.$$path);
+                $scope.showTabs = $location.$$path !== '/';
+            });
+
             $scope.changeTabMode = function(type) {
                 var view = (type === 'list-view' ? 'LIST' : 'MAP');
                 events.$emit(events.footer[view + '_VIEW']);

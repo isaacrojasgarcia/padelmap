@@ -1,14 +1,18 @@
 <div class="olaf-results">
-	<olaf-header></olaf-header>
 	<div class="sr-container">
+
+		<!-- Searcher -->
 		<div class="searcher-container" ng-class="{ 'mobile-hide-tab': !mobileListView }">
 			<olaf-searcher></olaf-searcher>
 		</div>
 
+		<!-- Map -->
 		<div class="map-container" ng-class="{ 'mobile-hide-tab': !!mobileListView }">
 			<olaf-map map="map"></olaf-map>
 		</div>
 
+
+		<!-- Toggle button -->
 		<div class="data-container bs-callout bs-callout-warning"
 			ng-class="{
 					'closed': !showSidePanel,
@@ -28,14 +32,11 @@
 							'fa-arrow-right': showSidePanel,
 							'fa-arrow-left': !showSidePanel
 						}">
-
-						<!-- ng-class="{
-							'fa-angle-double-right': showSidePanel,
-							'fa-angle-double-left': !showSidePanel
-						}" -->
 					</span>
 				</a>
 			</div>
 		</div>
+
+
 	</div>
 </div>

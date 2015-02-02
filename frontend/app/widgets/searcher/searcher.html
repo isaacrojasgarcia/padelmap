@@ -4,16 +4,16 @@
 			+1000 Pistas de Pádel
 		</p>
 		<div class="input-group" ng-class="{ 'input-group-lg': type == 'H' }">
-			<input type="text" 
+			<input type="text"
 				ng-model="locationSelected" placeholder="Dónde quieres jugar?" ng-focus="type == 'H'"
-				typeahead="location as location.title for location in locations | filter:{name:$viewValue}" 
+				typeahead="location as location.title for location in locations | filter:{name:$viewValue}"
 				typeahead-on-select="typeaheadSelected()"
 				typeahead-min-length="3" class="form-control">
 				<!-- typeahead-template-url="customTemplate.html"  -->
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="button" ng-click="nearTo()"
 					data-toggle="tooltip" data-placement="bottom" title="Pistas cercanas">
-					<i class="fa fa-location-arrow"></i> 
+					<i class="fa fa-location-arrow"></i>
 				</button>
 			</span>
 			<span class="input-group-btn">
@@ -24,8 +24,8 @@
 			</span>
 		</div>
 	</div>
-	
-	<div class="col-md-6 spain-map" ng-class="{ 'col-md-offset-3': searcherType == 'H' }" ng-if="!!showMap">
+
+	<!-- <div class="col-md-6 spain-map" ng-class="{ 'col-md-offset-3': searcherType == 'H' }" ng-if="!!showMap">
 		<olaf-spain-map item="spain-map"></olaf-spain-map>
-	<div>
+	<div> -->
 </div>

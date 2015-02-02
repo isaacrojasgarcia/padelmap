@@ -17,7 +17,7 @@
 
             $scope.typeaheadSelected = function() {
                 $location.path('/' + config.paths.searchResult + '/' + $scope.locationSelected.friendly);
-                
+
                 // Doesn't work in the SR because it belogns to another parent directive
                 // It works when the searcher belogns to the same "page"
                 // events.$emit(events.searcher.LOCATION_SELECTED, $scope.locationSelected);
@@ -26,7 +26,7 @@
             $scope.nearTo = function() {
                 if(navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position){
-                        console.log('position', position);
+                        // console.log('position', position);
                         var uri = '/' + config.paths.nearby;
                         $location.path(uri);
                         $location.search('lat', position.coords.latitude);
@@ -39,7 +39,9 @@
         }
 
 	    function olafSearcherLink (scope, elm, attr) {
-	       scope.showMap = attr.showMap || false;
+
+	        scope.showMap = attr.showMap || false;
+            console.log('SHOW MAP', attr.showMap, scope.showMap);
 	    }
 
         return {
