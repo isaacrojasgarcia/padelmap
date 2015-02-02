@@ -374,7 +374,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig(gruntConfig);
 
-    grunt.registerTask('scripts', ['ngtemplates', 'ngmodules', 'concat', 'clean:temp']);  // Uglify for prd
+    grunt.registerTask('scripts', ['ngtemplates', 'ngmodules', 'concat', 'uglify', 'clean:temp']);  // Uglify for prd
     grunt.registerTask('styles', ['cssmin']);
 
     grunt.registerTask('default', ['clean', 'copy', 'template:html', 'scripts', 'styles']);
