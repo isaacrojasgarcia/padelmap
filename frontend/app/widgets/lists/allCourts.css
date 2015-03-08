@@ -1,9 +1,7 @@
-.static-page-container {
-    margin-top: 75px;
-}
-
-@media (min-width: 992px) {
-    .static-page-container {
-        margin-top: 5px;
-    }
+.all-courts-list {
+    height: 100%;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    overflow: scroll;
 }

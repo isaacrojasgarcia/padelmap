@@ -1,12 +1,11 @@
-<div class="static-page-container sr-container">
-
-    <div class="row">
-		<h2>Todas las pistas</h2>
+<div class="">
+    <div class="all-courts-list">
+    	<h2>Todas las pistas</h2>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="court in courts">
+                <a href="/centros/{{ court.friendly }}/{{ court.id }}">{{ court.name }}</a>
+            </li>
+            <li class="sr-fix-ios">.</li>
+        </ul>
     </div>
-
-    <ul class="row">
-        <li ng-repeat="court in courts">
-            <a href="/centros/{{ court.friendly }}/{{ court.id }}">{{ court.name }}</a>
-        </li>
-    </ul>
 <div>
