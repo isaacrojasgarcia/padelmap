@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var module = angular.module('olaf.components.Facebook', []);
+    var module = angular.module('olaf.components.facebook', []);
     module.service('Facebook', OlafFacebookService);
 
     OlafFacebookService.$inject = ['$q', 'config'];
@@ -16,7 +16,7 @@
 
         Facebook.login = methodFactory(login, 'login');
         Facebook.getLoginStatus = methodFactory(getLoginStatus, 'getLoginStatus');
-        
+
 
         // ===== Functions ==== //
         function isReady() {
@@ -50,7 +50,7 @@
                 });
 
                 Facebook.ready = true;
-                defer.resolve();                
+                defer.resolve();
             };
 
             (function(d, s, id){
@@ -104,7 +104,7 @@
             return defer.promise;
         }
 
-        
+
 
 
         // ==== Private ==== //
@@ -115,7 +115,7 @@
                         me: me
                     }));
                 });
-            } 
+            }
             else {
                 defer.resolve(response);
             }
