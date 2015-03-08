@@ -1,0 +1,12 @@
+<div class="static-page-container sr-container">
+
+    <div class="row">
+		<h2>Todas las pistas</h2>
+    </div>
+
+    <ul class="row">
+        <li ng-repeat="court in courts">
+            <a href="/centros/{{ court.friendly }}/{{ court.id }}">{{ court.name }}</a>
+        </li>
+    </ul>
+<div>

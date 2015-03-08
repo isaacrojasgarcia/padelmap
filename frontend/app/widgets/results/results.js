@@ -6,11 +6,11 @@
     module.factory('olafLocation', locationFactory);
 
     OlafResultsDirective.$inject = [
-        '$location', '$q', '$timeout', 'http', 'events', 'config', 'olafLocation',
+        '$location', '$q', '$timeout', 'events', 'config', 'olafLocation',
         'localRepo', 'centersSvc', 'Location', 'Map', 'Results'];
 
     function OlafResultsDirective (
-            $location, $q, $timeout, http, events, config, olafLocation,
+            $location, $q, $timeout, events, config, olafLocation,
             localRepo, centersSvc, Location, Map, Results) {
         return {
             restrict: 'E',

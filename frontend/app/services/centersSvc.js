@@ -11,7 +11,8 @@
             getCenterById: getCenterById,
             getDataByLocation: getDataByLocation,
             applyFilters: applyFilters,
-            getDataNearby: getDataNearby
+            getDataNearby: getDataNearby,
+            getAllCenters: getAllCenters
         };
 
 
@@ -45,6 +46,18 @@
             makeCall(url, defer, function(data) {
                 // console.log('data nearby:', data);
                 centers = data.items
+            });
+
+            return defer.promise;
+        }
+
+
+        function getAllCenters() {
+            var url = config.apiUrl + config.api.paths.allCourts,
+                defer = $q.defer();
+
+            makeCall(url, defer, function(data) {
+                centers = data.items;
             });
 
             return defer.promise;

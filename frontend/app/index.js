@@ -28,7 +28,8 @@
                 ['/' + config.paths.nearby, { template: '<olaf-results type="nearby"></olaf-results>' }],
                 ['/' + config.paths.searchResult + '/:city', { template: '<olaf-results></olaf-results>' }],
                 ['/' + config.paths.searchResult + '/:city/:town', { template: '<olaf-results></olaf-results>' }],
-                ['/' + config.paths.details + '/:center/:id', { template: '<olaf-results type="details"></olaf-results>' }]
+                ['/' + config.paths.details + '/:center/:id', { template: '<olaf-results type="details"></olaf-results>' }],
+                ['/' + config.paths.allCourts, { template: '<olaf-all-courts></olaf-all-courts>' }]
             ];
 
         routes.forEach(function (row) {

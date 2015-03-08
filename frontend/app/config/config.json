@@ -8,7 +8,8 @@
         "paths": {
             "centers": "centers",
             "details": "details",
-            "nearby": "nearto"
+            "nearby": "nearto",
+            "allCourts": "all-centers"
         }
     },
     "localRepo": {
@@ -17,7 +18,8 @@
     "paths": {
         "searchResult": "pistas-de-padel",
         "nearby": "pistas-de-padel-cercanas",
-        "details": "centros"
+        "details": "centros",
+        "allCourts": "todas-las-pistas"
     },
     "locations": {
         "madrid": {

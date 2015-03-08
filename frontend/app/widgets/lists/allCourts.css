@@ -1,0 +1,9 @@
+.static-page-container {
+    margin-top: 75px;
+}
+
+@media (min-width: 992px) {
+    .static-page-container {
+        margin-top: 5px;
+    }
+}
