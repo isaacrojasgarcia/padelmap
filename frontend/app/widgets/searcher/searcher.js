@@ -41,7 +41,7 @@
 	    function olafSearcherLink (scope, elm, attr) {
 
 	        scope.showMap = attr.showMap || false;
-            console.log('SHOW MAP', attr.showMap, scope.showMap);
+            // console.log('SHOW MAP', attr.showMap, scope.showMap);
 	    }
 
         return {

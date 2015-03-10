@@ -10,7 +10,7 @@
 	    function olafFooterCtrl($scope, $location, events) {
             $scope.showTabs = true;
             $scope.$on('$routeChangeSuccess', function () {
-                console.log('chnaging route', $location.$$path);
+                // console.log('chnaging route', $location.$$path);
                 $scope.showTabs = $location.$$path !== '/';
             });
 

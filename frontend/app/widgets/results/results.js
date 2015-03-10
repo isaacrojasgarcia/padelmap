@@ -88,7 +88,7 @@
                 // console.log('Centers:', $scope.centers);
 
                 _.forEach($scope.centers, function(item) {
-                    console.log(item);
+                    // console.log(item);
                     result.push(_.extend(item, {
                         // 'id': item.friendly,
                         'icon': '/img/player.png',
@@ -105,7 +105,7 @@
             }
 
             function onClickMarker(result) {
-                console.log(result.model);
+                // console.log(result.model);
                 // events.$emit(events.sr.CENTER_SELECTED, result.model);
             }
 
