@@ -8,9 +8,11 @@
         click="'onClick'"
         labelContent="'title'"
         labelAnchor="22 0">
-        <!-- <windows show="'showWindow'" closeClick="'onClose'" ng-cloak>
-            <div ng-non-bindable>{{name}}</div>
-        </windows> -->
+        <ui-gmap-windows show="showWindow">
+            <div ng-non-bindable>
+                <a href="/centros/{{friendly}}/{{id}}">{{ name }}</a>
+            </div>
+        </ui-gmap-windows>
     </ui-gmap-markers>
 
     <!-- <marker ng-if="userLocation"

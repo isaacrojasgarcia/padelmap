@@ -61,8 +61,7 @@
                 }),
 
                 events.$on(events.sr.CENTER_SELECTED, function(event, center) {
-                    console.log(center);
-                    // centerSelected(center);
+                    centerSelected(center);
                 }),
 
                 events.$on(events.sr.GO_BACK_TO_LIST, function(event) {
@@ -89,9 +88,9 @@
                 // console.log('Centers:', $scope.centers);
 
                 _.forEach($scope.centers, function(item) {
-                    // console.log(item);
+                    console.log(item);
                     result.push(_.extend(item, {
-                        'id': item.friendly,
+                        // 'id': item.friendly,
                         'icon': '/img/player.png',
                         'showWindow': false,
                         'onClick': onClickMarker
@@ -106,7 +105,8 @@
             }
 
             function onClickMarker(result) {
-                events.$emit(events.sr.CENTER_SELECTED, result.model);
+                console.log(result.model);
+                // events.$emit(events.sr.CENTER_SELECTED, result.model);
             }
 
             function changeView(value) {
