@@ -2,5 +2,8 @@
   "name": "mapadepadel",
   "root": "dist",
   "clean_urls": true,
-  "error_page": "error"
+  "error_page": "error",
+  "routes": {
+    "**": "index.html"
+  }
 }
