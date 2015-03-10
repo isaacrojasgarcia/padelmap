@@ -20,7 +20,7 @@
         };
 
         function olafResultsLink (scope, elem, attrs) {
-            console.log('-->', attrs.type);
+            // console.log('-->', attrs.type);
             scope.changeView(attrs.type || 'list');
         }
 
@@ -44,7 +44,7 @@
             // ===== Events ===== //
             $scope.$watch('resultType', function(value) {
                 $scope.isList = (value === 'list' || value == 'nearby');
-                console.log('isList:', $scope.isList);
+                // console.log('isList:', $scope.isList);
             });
 
 
@@ -61,7 +61,8 @@
                 }),
 
                 events.$on(events.sr.CENTER_SELECTED, function(event, center) {
-                    centerSelected(center);
+                    console.log(center);
+                    // centerSelected(center);
                 }),
 
                 events.$on(events.sr.GO_BACK_TO_LIST, function(event) {
@@ -70,12 +71,12 @@
 
                 events.$on(events.footer.LIST_VIEW, function(event) {
                     $scope.mobileListView = true;
-                    console.log('LIST_VIEW', $scope.mobileListView);
+                    // console.log('LIST_VIEW', $scope.mobileListView);
                 }),
 
                 events.$on(events.footer.MAP_VIEW, function(event) {
                     $scope.mobileListView = false;
-                    console.log('MAP_VIEW', $scope.mobileListView);
+                    // console.log('MAP_VIEW', $scope.mobileListView);
                 })
             );
 
@@ -85,9 +86,12 @@
             // Markers functions
             function getMarkers() {
                 var result = []
+                // console.log('Centers:', $scope.centers);
+
                 _.forEach($scope.centers, function(item) {
                     // console.log(item);
                     result.push(_.extend(item, {
+                        'id': item.friendly,
                         'icon': '/img/player.png',
                         'showWindow': false,
                         'onClick': onClickMarker
@@ -101,8 +105,8 @@
                 return result;
             }
 
-            function onClickMarker() {
-                events.$emit(events.sr.CENTER_SELECTED, this.model);
+            function onClickMarker(result) {
+                events.$emit(events.sr.CENTER_SELECTED, result.model);
             }
 
             function changeView(value) {
@@ -177,7 +181,7 @@
 
                     if(!$scope.previousList) {
                         $scope.centers = [ response ];
-                        $scope.markers.data = getMarkers();
+                        $scope.map.markers = getMarkers();
                     }
 
                     _.extend($scope.map, {
