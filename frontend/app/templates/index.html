@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html id="ng-app" lang="{{ lang }}" ng-app="olaf" ng-cloak>
     <head>
-        <title>Mapa de Padel</title>
+        <title>{{ site.title }} | Mapa de Padel</title>
         <meta charset="utf-8">
-        <meta name="fragment" content="!">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta property="og:url" content="{{ site.og.url }}">
-        <meta property="og:title" content="{{ site.og.title }}">
-        <meta property="og:image" content="">
-        <meta property="og:description" content="{{ site.og.desc }}">
-        <meta property="fb:app_id" content="{{ site.og.id }}">
+        <meta name="keywords" content="{{ site.keywords }}, {{ site.defaultKeywords }}" />
+        <meta name="description" content="{{ site.desc }}" />
+        <meta name="robots" content="index, follows" />
+        <meta name="fragment" content="!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-        <meta name="description" content="{{ site.desc }}">
+        <meta property="og:url" content="{{ site.og.url }}" />
+        <meta property="og:title" content="{{ site.og.title }}" />
+        <meta property="og:image" content="" />
+        <meta property="og:description" content="{{ site.og.desc }}" />
+        <meta property="fb:app_id" content="{{ site.og.id }}" />
+
         <link rel="stylesheet" href="/css/padel.min.css?v=<%= commitId %>">
     </head>
     <body class="{{ bodyClass }} no-scroll" ng-cloak ng-controller="bodyCtrl">

@@ -46,18 +46,28 @@
         $locationProvider.hashPrefix('!');
     }
 
-    RunCtrl.$inject = ['$rootScope', 'Facebook'];
-    function RunCtrl($rootScope, Facebook) {
-        $rootScope.site = {
-            title: 'PadelWar.com',
-            description: '',
-            og: {
-                title: 'PadelWar | by Lt.',
-                url: 'https://www.padelwar.com/',
-                desc: '',
+    RunCtrl.$inject = ['$rootScope', 'events'];
+    function RunCtrl($rootScope, events) {
+        var deregisters = [];
+        $scope.$on('$destroy', _.executor(deregisters));
 
+        $rootScope.site = {
+            title: 'Mapa de Padel'
+            description: '',
+            keywords: '',
+            defaultKeyswords: 'padel, mapa de padel, pistas de padel',
+            og: {
+                title: 'Mapa de Padel | by Lt.',
+                url: 'https://www.mapadepadel.com/',
+                desc: 'El buscador más rápido de la península ibérica',
             }
         };
+
+        events.$on(events.metatags.UPDATE, function(data) {
+            $rootScope.site.title = data.title;
+            $rootScope.site.descripttion = data.description;
+            $rootScope.site.keywords = data.keywords
+        });
 
         // Facebook.init();
     }
