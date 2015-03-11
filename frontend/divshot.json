@@ -4,6 +4,8 @@
   "clean_urls": true,
   "error_page": "error",
   "routes": {
-    "**": "index.html"
+    "**": "index.html",
+    "/sitemaps/*": "/sitemaps/*",
+    "google*": "google*"
   }
 }
