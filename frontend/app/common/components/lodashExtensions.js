@@ -4,11 +4,14 @@
  * Underscore String:   https://github.com/epeli/underscore.string
  */
 (function () {
+
     'use strict';
 
     angular.module('olaf.components.lodashExtensions', []);
 
-    var ZERO_THROUGH_NINE = _.range(10);
+    var ZERO_THROUGH_NINE = _.range(10),
+        MUST_BE_A_FUNCTION = ' must be a function',
+        _isString = _.isString;
 
     _.templateSettings = {
         interpolate: /\{\{(.+?)\}\}/g
@@ -16,6 +19,7 @@
 
     _.mixin({
         apply: apply,
+        copyValues: copyValues,
 
         /**
          * Executes every function in the passed array of functions
@@ -55,6 +59,22 @@
          */
         increment: function (value) {
             return value + 1;
+        },
+
+        inherit: inherit,
+
+        /**
+         * Checks if the passed value is a string, and optionally, of a minimum length.
+         * @param {*} value
+         * @param {number} [minLength]
+         * @override
+         * @returns {Boolean}
+         */
+        isString: function (value, minLength) {
+            if (Number.isFinite(minLength) && minLength > 0) {
+                return _isString(value) && value.length >= minLength;
+            }
+            return _isString(value);
         },
 
         /**
@@ -109,6 +129,17 @@
          */
         truncateNumber: function (value) {
             return Math.floor(value * 100) / 100;
+        },
+
+        /**
+         * Checks if every value of the input is falsy
+         * @param collection
+         * @param [callback=identity] function called per iteration
+         * @param [thisArg] the this binding of the callback
+         * @returns true if all elements resulted in false in the callback
+         */
+        none: function (collection, callback, thisArg) {
+            return !_.some(collection, callback, thisArg);
         }
     });
 
@@ -129,6 +160,60 @@
     function apply(array, methodName, args) {
         var wrapped = _(array);
         return wrapped[methodName].apply(wrapped, args).value();
+    }
+
+
+    /**
+     * Copies values from one source object to a subject object ONLY if the destination already has that property.
+     * @param {Object} destination
+     * @param {Object} source
+     * @returns {*} destination
+     */
+    function copyValues(destination, source) {
+        if (_.isObject(source)) {
+            _.forOwn(destination, function (value, key) {
+                var sourceValue = source[key];
+                if (!_.isUndefined(sourceValue)) {
+                    destination[key] = sourceValue;
+                }
+            });
+        }
+        return destination;
+    }
+
+
+    /**
+     * TODO: Build in support for supers of type objects
+     * TODO: Build in support for super’s static methods
+     * @param {Function} Constructor
+     * @param {Function} Super
+     * @param {Object} [properties] - An object with properties to add to the Constructor’s prototype
+     * @returns {Function}
+     */
+    function inherit(Constructor, Super, properties) {
+        if (!_.isFunction(Constructor)) {
+            throw new TypeError('Constructor' + MUST_BE_A_FUNCTION);
+        }
+        if (!_.isFunction(Super)) {
+            throw new TypeError('Super' + MUST_BE_A_FUNCTION);
+        }
+        //Inherit from Super
+        Constructor.prototype = Object.create(Super.prototype);
+        Object.defineProperties(Constructor.prototype, {
+            //Rebind the `constructor` property
+            'constructor': { value: Constructor },
+            //Create the `super` method
+            'super': {
+                value: function superFn() {
+                    return Super.apply(this, arguments);
+                }
+            }
+        });
+        //Extend with prototype properties
+        _.forOwn(properties, function (value, key) {
+            Constructor.prototype[key] = value;
+        });
+        return Constructor;
     }
 
 }());
