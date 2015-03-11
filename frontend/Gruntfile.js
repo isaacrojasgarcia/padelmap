@@ -285,6 +285,26 @@ module.exports = function (grunt) {
                         dest: '<%= padel.dist %>/'
                     }
                 ]
+            },
+            sitemaps: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= padel.app %>/assets/sitemaps',
+                        src: ['*.xml'],
+                        dest: '<%= padel.dist %>/sitemaps/'
+                    }
+                ]
+            },
+            googleWebmaster: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= padel.app %>/assets',
+                        src: ['googlebd1ac020d1a45a02.html'],
+                        dest: '<%= padel.dist %>/'
+                    }
+                ]
             }
         },
         template: {
