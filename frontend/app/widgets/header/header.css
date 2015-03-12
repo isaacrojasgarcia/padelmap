@@ -3,12 +3,9 @@ html, body {
 }
 
 .olaf-header {
-	/*background: #FFF;*/
-	/*border-bottom: 2px solid #CD3434;*/
 	position: absolute;
 	padding: 0 10px;
 	top: 0;
-	/*height: 50px;*/
 	text-align: center;
 	z-index: 20;
 	width: 100%;
@@ -50,8 +47,8 @@ a.home-title-wrapper {
 
 @media (min-width: 992px) {
 	.olaf-header {
-		width: 340px;
-		right: 22px;
+		width: 400px;
+  		right: 0;
 	}
 
 	.olaf-header img {
