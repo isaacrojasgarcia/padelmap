@@ -33,13 +33,10 @@
             ];
 
         routes.forEach(function (row) {
-            // $routeProvider.when('/:lang' + row[0], { redirectTo: row[0] });
             $routeProvider.when(row[0], row[1]);
         });
 
-        // $routeProvider.when('/:lang', { redirectTo: '/' });
         $routeProvider.when('/', { template: '<olaf-home></olaf-home>'});  // , reloadOnSearch: false
-
         $routeProvider.otherwise({ redirectTo: '/' });
 
         $locationProvider.html5Mode(true);
@@ -49,13 +46,13 @@
     RunCtrl.$inject = ['$rootScope', 'events'];
     function RunCtrl($rootScope, events) {
         var deregisters = [];
-        $scope.$on('$destroy', _.executor(deregisters));
+        $rootScope.$on('$destroy', _.executor(deregisters));
 
         $rootScope.site = {
-            title: 'Mapa de Padel'
+            title: 'Mapa de Padel',
             description: '',
             keywords: '',
-            defaultKeyswords: 'padel, mapa de padel, pistas de padel',
+            defaultKeywords: 'padel, mapa de padel, pistas de padel',
             og: {
                 title: 'Mapa de Padel | by Lt.',
                 url: 'https://www.mapadepadel.com/',
@@ -63,11 +60,14 @@
             }
         };
 
-        events.$on(events.metatags.UPDATE, function(data) {
-            $rootScope.site.title = data.title;
-            $rootScope.site.descripttion = data.description;
-            $rootScope.site.keywords = data.keywords
-        });
+        deregisters.push(
+            events.$on(events.metatags.UPDATE, function(event, data) {
+                $rootScope.site.title = data.title;
+                $rootScope.site.description = data.description;
+                $rootScope.site.keywords = data.keywords
+                // console.log('-> Site:', $rootScope.site);
+            })
+        );
 
         // Facebook.init();
     }

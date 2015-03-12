@@ -131,6 +131,7 @@
 
             function getCentersInfo(value) {
                 function afterData(response) {
+                    // console.log(response);
                     var defer = $q.defer();
                     $scope.location.setName(response.location);
                     $scope.centers = response.items;
@@ -143,8 +144,15 @@
                 switch(value) {
                     case 'list':
                         $scope.location = Location.convertPathToLocation($location.path());
-                        // console.log('Location::', $scope.location);
                         centersSvc.getDataByLocation($scope.location).then(afterData);
+
+                        var dataSite = {
+                            title: $scope.location.getName(),
+                            description: config.texts.description.replace(/%s/g, $scope.location.getName()),
+                            keywords: config.texts.keywords.replace(/%s/g, $scope.location.getName())
+                        };
+
+                        events.$emit(events.metatags.UPDATE, dataSite);
                     break;
 
                     case 'nearby':
@@ -153,6 +161,12 @@
                                 latitude: search.lat,
                                 longitude: search.long
                             };
+
+                        events.$emit(events.metatags.UPDATE, {
+                            title: config.texts.nearby,
+                            description: config.texts.nearby,
+                            keywords: config.texts.nearby
+                        });
 
                         $scope.userLocation = [
                             {
@@ -178,6 +192,12 @@
                 var id = $scope.center.id ? $scope.center.id : _.last(_.compact($location.path().split('/')));
                 centersSvc.getCenterById(id).then(function(response) {
                     $scope.center = response;
+
+                    events.$emit(events.metatags.UPDATE, {
+                        title: response.name,
+                        description: response.name,
+                        keywords: response.name
+                    });
 
                     if(!$scope.previousList) {
                         $scope.centers = [ response ];

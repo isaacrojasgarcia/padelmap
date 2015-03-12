@@ -57,5 +57,11 @@
         "app": {
             "id": "677754538974578"
         }
+    },
+    "texts": {
+        "title": "Pistas de pádel en %s",
+        "description": "Pistas de pádel en %s",
+        "keywords": "Pistas de pádel en %s",
+        "nearby": "Pistas de pádel cerca de mi"
     }
 }
