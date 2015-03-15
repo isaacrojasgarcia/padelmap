@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html id="ng-app" lang="{{ lang }}" ng-app="olaf" ng-cloak>
     <head>
-        <title>{{ site.title }} | Mapa de Padel</title>
+        <title ng-cloak>{{ site.title }} | Mapa de Padel</title>
         <meta charset="utf-8">
-        <meta name="keywords" content="{{ site.keywords }}, {{ site.defaultKeywords }}" />
-        <meta name="description" content="{{ site.description }}" />
+        <meta name="keywords" content="{{ site.keywords }}, {{ site.defaultKeywords }}" ng-cloak />
+        <meta name="description" content="{{ site.description }}" ng-cloak />
         <meta name="robots" content="index, follows" />
         <meta name="fragment" content="!" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-        <meta property="og:url" content="{{ site.og.url }}" />
-        <meta property="og:title" content="{{ site.og.title }}" />
+        <meta property="og:url" content="{{ site.og.url }}" ng-cloak />
+        <meta property="og:title" content="{{ site.og.title }}" ng-cloak />
         <meta property="og:image" content="" />
-        <meta property="og:description" content="{{ site.og.desc }}" />
-        <meta property="fb:app_id" content="{{ site.og.id }}" />
+        <meta property="og:description" content="{{ site.og.desc }}" ng-cloak />
+        <meta property="fb:app_id" content="{{ site.og.id }}" ng-cloak />
 
         <link rel="stylesheet" href="/css/padel.min.css?v=<%= commitId %>">
 
