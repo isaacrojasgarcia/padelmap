@@ -1,7 +1,13 @@
 Mapa de Padel
 ==
 
-# Information
+
+# Deployment
+```
+$ divshot push
+$ divshot promote development to production
+```
+
 
 
 ## Page Structure
