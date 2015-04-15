@@ -212,7 +212,7 @@
                     // Looking for booking url
                     _.each(response.services, function(item) {
                         if(item.abrev === 'booking') {
-                            $scope.center.booking = item.feature;
+                            $scope.center.booking = item.value;
                         }
                     });
 
